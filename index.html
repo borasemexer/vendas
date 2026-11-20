@@ -103,7 +103,7 @@
       margin-bottom: 18px;
     }
 
-    /* Capa Leve para Vídeos Extras (Não trava o celular) */
+    /* Capa Leve para Vídeos Extras */
     .lite-yt {
       position: relative;
       width: 100%;
@@ -148,7 +148,6 @@
       border: 0;
     }
 
-    /* Ancoragem rápida acima do primeiro botão */
     .top-anchor-box {
       text-align: center;
       margin-bottom: 10px;
@@ -232,7 +231,7 @@
       margin-bottom: 14px;
     }
 
-    /* Carrossel Horizontal para Celular */
+    /* Carrossel Horizontal */
     .carousel-hint {
       font-size: 12px;
       font-weight: 700;
@@ -288,6 +287,34 @@
       margin-bottom: 10px;
     }
 
+    /* Mockups de Celular (Por dentro do App) */
+    .app-screen-card {
+      flex: 0 0 66%;
+      scroll-snap-align: center;
+      background: #0f0f0f;
+      border-radius: 22px;
+      padding: 8px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+    }
+    .app-screen-card img {
+      width: 100%;
+      border-radius: 15px;
+      display: block;
+      height: auto;
+    }
+    .app-screen-label {
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      padding: 8px 4px 2px;
+    }
+    .app-screen-label span {
+      color: var(--neon-green);
+    }
+
     /* Entregáveis */
     .deliverable-card {
       background: var(--surface);
@@ -338,7 +365,7 @@
     .faq-item h4 { font-size: 15px; font-weight: 800; margin-bottom: 5px; }
     .faq-item p { font-size: 14px; color: var(--muted); }
 
-    /* Oferta Final com Ancoragem Forte */
+    /* Oferta Final */
     .offer-box {
       border: 2px solid var(--pink);
       border-radius: 20px;
@@ -442,8 +469,8 @@
         <span>Centenas de alunas</span>
       </div>
       <div class="proof-item">
-        <strong>+20</strong>
-        <span>Modalidades extras</span>
+        <strong>+900</strong>
+        <span>Aulas extras</span>
       </div>
       <div class="proof-item">
         <strong>Nutri + Personal</strong>
@@ -515,7 +542,7 @@
       <div class="deliverable-card">
         <div class="check-icon">✓</div>
         <div>
-          <h3>Treino para Casa ou Academia</h3>
+          <h3>Treino para Casa, Academia ou de 5 Minutos</h3>
           <p>Treinos objetivos que cabem na sua agenda — sem precisar morar na academia ou treinar todos os dias.</p>
         </div>
       </div>
@@ -523,8 +550,8 @@
       <div class="deliverable-card">
         <div class="check-icon">✓</div>
         <div>
-          <h3>Dieta Calculada Sem Restrições</h3>
-          <p>Alimentação calculada para o seu objetivo sem terrorismo nutricional, acabando com o ciclo de restrição e compulsão.</p>
+          <h3>Dieta Calculada Sem Restrições (Com Sobremesa!)</h3>
+          <p>Cardápio calculado para o seu peso e objetivo sem terrorismo nutricional, acabando com a compulsão.</p>
         </div>
       </div>
 
@@ -540,7 +567,7 @@
         <div class="check-icon">✓</div>
         <div>
           <h3>App Exclusivo + Notificações Diárias</h3>
-          <p>Lembretes inteligentes no app e grupo ativo de interação para você nunca mais desanimar sozinha.</p>
+          <p>Lembretes inteligentes no celular e grupo ativo de interação para você nunca mais desanimar sozinha.</p>
         </div>
       </div>
 
@@ -548,15 +575,54 @@
         <div class="check-icon">✓</div>
         <div>
           <h3>Desafios Valendo Prêmios</h3>
-          <p>Metas práticas dentro do programa que premiam a sua constância.</p>
+          <p>Metas práticas dentro do programa com ranking e pontuação que premiam a sua constância.</p>
         </div>
       </div>
 
       <div class="deliverable-card">
         <div class="check-icon">✓</div>
         <div>
-          <h3>+20 Modalidades de Aulas Extras e Biblioteca</h3>
-          <p>Aulas variadas para fazer quando quiser e conteúdos diretos sobre rotina, mentalidade e alimentação.</p>
+          <h3>+900 Aulas Extras (20 Modalidades) e Biblioteca</h3>
+          <p>HIIT, Pilates, Zumba, Sem Impacto, GAP e vídeos diretos sobre como vencer a compulsão e a falta de motivação.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOUR POR DENTRO DO APP (PRINTS REAIS) -->
+    <div class="section">
+      <h2>Veja por dentro do App que você vai receber:</h2>
+      <p class="section-desc">Tudo organizado na palma da sua mão, fácil de usar e sem complicação.</p>
+      <div class="carousel-hint">👉 Arraste para navegar pelas telas do app</div>
+
+      <div class="horizontal-scroll">
+        <div class="app-screen-card">
+          <img src="app-1.jpg" alt="Tela inicial do App Tô Me Mexendo" loading="lazy">
+          <div class="app-screen-label"><span>01.</span> Área Exclusiva + Notificações</div>
+        </div>
+
+        <div class="app-screen-card">
+          <img src="app-2.jpg" alt="Cardápio Calculado com Sobremesa" loading="lazy">
+          <div class="app-screen-label"><span>02.</span> Dieta Calculada (Até Sobremesa!)</div>
+        </div>
+
+        <div class="app-screen-card">
+          <img src="app-3.jpg" alt="Treino em Casa, Academia e 5 Min" loading="lazy">
+          <div class="app-screen-label"><span>03.</span> Casa, Academia ou 5 Minutos</div>
+        </div>
+
+        <div class="app-screen-card">
+          <img src="app-4.jpg" alt="Mais de 900 Aulas Extras" loading="lazy">
+          <div class="app-screen-label"><span>04.</span> +900 Aulas de 20 Modalidades</div>
+        </div>
+
+        <div class="app-screen-card">
+          <img src="app-5.jpg" alt="Biblioteca de Conteúdos" loading="lazy">
+          <div class="app-screen-label"><span>05.</span> Biblioteca Contra Compulsão</div>
+        </div>
+
+        <div class="app-screen-card">
+          <img src="app-6.jpg" alt="Desafio Valendo Prêmios" loading="lazy">
+          <div class="app-screen-label"><span>06.</span> Desafios com Ranking e Prêmios</div>
         </div>
       </div>
     </div>
@@ -580,12 +646,12 @@
 
       <div class="faq-item">
         <h4>"Não tenho tempo para treinar todo dia, funciona?"</h4>
-        <p>Sim! O método foi desenhado exatamente para quem tem rotina corrida e consegue treinar a partir de 3x na semana.</p>
+        <p>Sim! O método foi desenhado exatamente para quem tem rotina corrida — com treinos a partir de 3x na semana e até opções de 5 minutos para dias super corridos.</p>
       </div>
 
       <div class="faq-item">
         <h4>"Tenho compulsão e não consigo seguir dieta..."</h4>
-        <p>A compulsão quase sempre nasce da restrição exagerada. Aqui você come comida de verdade (inclusive seu doce/chocolate dentro do cálculo) sem proibições absurdas.</p>
+        <p>A compulsão quase sempre nasce da restrição exagerada. Aqui você tem até opções de sobremesa dentro do cálculo, sem proibições absurdas.</p>
       </div>
 
       <div class="faq-item">
@@ -603,7 +669,7 @@
       <div class="anchor-stack">
         <div class="anchor-row"><span>Treino + Dieta Calculada Individual</span> <s>R$ 150,00</s></div>
         <div class="anchor-row"><span>Suporte de Nutri e Personal</span> <s>R$ 120,00</s></div>
-        <div class="anchor-row"><span>App + Grupo + +20 Aulas Extras</span> <s>R$ 67,00</s></div>
+        <div class="anchor-row"><span>App + Grupo + +900 Aulas Extras</span> <s>R$ 67,00</s></div>
       </div>
 
       <div class="old-price">Valor normal do plano: <s>R$ 97,00/mês</s></div>
