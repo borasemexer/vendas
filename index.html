@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tô Me Mexendo | Método Real para Rotinas Corridas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f8f9fa;
+      --text: #0f0f0f;
+      --muted: #4b5563;
+      --pink: #ff1e7a;
+      --neon-green: #22e559;
+      --border: #e5e7eb;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .top-bar {
+      background: #0f0f0f;
+      color: #ffffff;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 9px 12px;
+      letter-spacing: 0.3px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .top-bar span { color: var(--neon-green); }
+
+    .container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 22px 16px 64px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 30, 122, 0.1);
+      color: var(--pink);
+      font-weight: 800;
+      font-size: 11.5px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    h1 {
+      font-size: 27px;
+      line-height: 1.18;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    h1 .highlight-pink { color: var(--pink); }
+
+    .subheadline {
+      font-size: 15.5px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* Player Vertical Shorts */
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto 20px;
+      aspect-ratio: 9 / 16;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+      border: 2px solid #0f0f0f;
+      background: #000;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+    .video-caption {
+      text-align: center;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .cta-btn {
+      display: block;
+      width: 100%;
+      background: var(--neon-green);
+      color: #051b0b;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 16.5px;
+      padding: 18px 18px;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(34, 229, 89, 0.35);
+      transition: transform 0.15s ease;
+      text-transform: uppercase;
+    }
+    .cta-btn:active { transform: scale(0.98); }
+
+    .cta-sub {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+      margin-bottom: 28px;
+    }
+
+    .proof-strip {
+      display: flex;
+      justify-content: space-between;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 10px;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    .proof-item { flex: 1; }
+    .proof-item strong { display: block; font-size: 17px; font-weight: 900; color: var(--pink); }
+    .proof-item span { font-size: 11px; color: var(--muted); font-weight: 600; }
+
+    .section { margin-bottom: 36px; }
+    .section h2 {
+      font-size: 21px;
+      font-weight: 900;
+      line-height: 1.22;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+    .section-desc {
+      font-size: 14.5px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .pain-box {
+      background: #fff5f9;
+      border-left: 4px solid var(--pink);
+      padding: 15px;
+      border-radius: 0 12px 12px 0;
+      font-size: 14.5px;
+      margin-bottom: 14px;
+    }
+
+    /* Carrossel Horizontal para Celular */
+    .carousel-hint {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--pink);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .horizontal-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .horizontal-scroll::-webkit-scrollbar { height: 6px; }
+    .horizontal-scroll::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 999px; }
+
+    .ba-card {
+      flex: 0 0 82%;
+      scroll-snap-align: center;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #fff;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    }
+    .ba-card img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    /* Cards de Vídeo Depoimento */
+    .testimonial-video-card {
+      flex: 0 0 76%;
+      scroll-snap-align: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .testimonial-tag {
+      display: inline-block;
+      background: #0f0f0f;
+      color: var(--neon-green);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .testimonial-video-card .video-wrapper {
+      max-width: 100%;
+      margin-bottom: 0;
+      border-width: 1px;
+    }
+
+    /* Entregáveis */
+    .deliverable-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 15px;
+      margin-bottom: 11px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .check-icon {
+      background: var(--neon-green);
+      color: #000;
+      font-weight: 900;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 13px;
+      margin-top: 2px;
+    }
+    .deliverable-card h3 { font-size: 15px; font-weight: 800; margin-bottom: 3px; }
+    .deliverable-card p { font-size: 13.5px; color: var(--muted); }
+
+    /* Comentários Instagram */
+    .ig-comments-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .ig-comment-img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      display: block;
+    }
+
+    /* Fallback de texto caso print não carregue */
+    .ig-quote-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 13.5px;
+    }
+    .ig-quote-card strong { color: var(--text); display: block; margin-bottom: 4px; }
+
+    /* FAQ */
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    .faq-item h4 { font-size: 15px; font-weight: 800; margin-bottom: 5px; }
+    .faq-item p { font-size: 14px; color: var(--muted); }
+
+    /* Oferta Final */
+    .offer-box {
+      border: 2px solid var(--pink);
+      border-radius: 18px;
+      padding: 24px 16px;
+      text-align: center;
+      background: #ffffff;
+      box-shadow: 0 12px 30px rgba(255, 30, 122, 0.1);
+    }
+    .price-tag {
+      font-size: 44px;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1;
+      margin: 10px 0 6px;
+    }
+    .price-tag small { font-size: 16px; font-weight: 600; color: var(--muted); }
+    .guarantee {
+      margin-top: 16px;
+      font-size: 12.5px;
+      color: var(--muted);
+      background: var(--surface);
+      padding: 12px;
+      border-radius: 10px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    VALIDADO DESDE 2018 • <span>COMECE HOJE POR R$ 39,90</span>
+  </div>
+
+  <div class="container">
+    <div class="badge">Para quem tem rotina corrida</div>
+    <h1>Emagreça e defina <span class="highlight-pink">sem dieta restritiva</span> e sem precisar treinar todo dia.</h1>
+    <p class="subheadline">Assista ao vídeo abaixo de 1 minuto e veja por dentro como funciona o método feito para quem sofre com falta de tempo, desânimo ou compulsão:</p>
+
+    <!-- VÍDEO PRINCIPAL DE DEMONSTRAÇÃO -->
+    <div class="video-wrapper">
+      <iframe
+        src="https://www.youtube.com/embed/t22pvPgqi_o?rel=0&modestbranding=1"
+        title="Demonstração Tô Me Mexendo"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <p class="video-caption">🔊 Toque no vídeo acima para ver o app, treino e dieta na prática</p>
+
+    <a href="https://mpago.la/1kCiDS3" class="cta-btn">QUERO COMEÇAR AGORA POR R$ 39,90</a>
+    <p class="cta-sub">🔒 Pagamento seguro via Mercado Pago • Cancele quando quiser</p>
+
+    <div class="proof-strip">
+      <div class="proof-item">
+        <strong>Desde 2018</strong>
+        <span>Centenas de alunas</span>
+      </div>
+      <div class="proof-item">
+        <strong>+20</strong>
+        <span>Modalidades extras</span>
+      </div>
+      <div class="proof-item">
+        <strong>Nutri + Personal</strong>
+        <span>Suporte individual</span>
+      </div>
+    </div>
+
+    <!-- QUEBRA DE PADRÃO / DOR -->
+    <div class="section">
+      <h2>Por que você sempre começa na segunda e para na quarta?</h2>
+      <div class="pain-box">
+        Porque tentaram te vender um plano feito para quem tem 3 horas livres por dia e zero vida social. Quando a rotina aperta, o cansaço bate, a restrição gera compulsão e você sente que falhou de novo.
+      </div>
+      <p style="font-size: 14.5px; color: var(--muted);">No <strong>Tô Me Mexendo</strong>, o plano se adapta ao seu dia real — não o contrário. Você não precisa de perfeição, precisa de constância possível.</p>
+    </div>
+
+    <!-- CARROSSEL DE ANTES E DEPOIS -->
+    <div class="section">
+      <h2>Resultados reais de mulheres com rotina comum:</h2>
+      <p class="section-desc">Sem viver na academia e sem cortar o que gostam de comer.</p>
+      <div class="carousel-hint">👉 Arraste para o lado para ver mais resultados</div>
+
+      <div class="horizontal-scroll">
+        <div class="ba-card"><img src="antes-depois-1.png" alt="Antes e Depois Tô Me Mexendo 1" loading="lazy"></div>
+        <div class="ba-card"><img src="antes-depois-2.png" alt="Antes e Depois Tô Me Mexendo 2" loading="lazy"></div>
+        <div class="ba-card"><img src="antes-depois-3.png" alt="Antes e Depois Tô Me Mexendo 3" loading="lazy"></div>
+        <div class="ba-card"><img src="antes-depois-4.png" alt="Antes e Depois Tô Me Mexendo 4" loading="lazy"></div>
+        <div class="ba-card"><img src="antes-depois-5.png" alt="Antes e Depois Tô Me Mexendo 5" loading="lazy"></div>
+        <div class="ba-card"><img src="antes-depois-6.png" alt="Antes e Depois Tô Me Mexendo 6" loading="lazy"></div>
+      </div>
+    </div>
+
+    <!-- DEPOIMENTOS EM VÍDEO (SHORTS) -->
+    <div class="section">
+      <h2>Ouça quem já passou pelo que você sente hoje:</h2>
+      <div class="carousel-hint">👉 Arraste para assistir aos 3 relatos</div>
+
+      <div class="horizontal-scroll">
+        <div class="testimonial-video-card">
+          <span class="testimonial-tag">🍫 -10kg comendo chocolate todo dia</span>
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/1l4r4RO2-ls?rel=0&modestbranding=1" title="Depoimento menos 10kg comendo chocolate" loading="lazy" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="testimonial-video-card">
+          <span class="testimonial-tag">🧠 Eliminou a compulsão alimentar</span>
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/-sVZs6fn_9U?rel=0&modestbranding=1" title="Depoimento eliminou compulsão" loading="lazy" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="testimonial-video-card">
+          <span class="testimonial-tag">⏰ Resultado mesmo na rotina corrida</span>
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/aNnni_RCPYU?rel=0&modestbranding=1" title="Depoimento rotina corrida" loading="lazy" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENTREGÁVEIS -->
+    <div class="section">
+      <h2>Tudo o que você recebe hoje por R$ 39,90:</h2>
+
+      <div class="deliverable-card">
+        <div class="check-icon">✓</div>
+        <div>
+          <h3>Treino para Casa ou Academia</h3>
+          <p>Treinos objetivos que cabem na sua agenda — sem precisar morar na academia ou treinar todos os dias.</p>
+        </div>
+      </div>
+
+      <div class="deliverable-card">
+        <div class="check-icon">✓</div>
+        <div>
+          <h3>Dieta Calculada Sem Restrições</h3>
+          <p>Alimentação calculada para o seu objetivo sem terrorismo nutricional, acabando com o ciclo de restrição e compulsão.</p>
+        </div>
+      </div>
+
+      <div class="deliverable-card">
+        <div class="check-icon">✓</div>
+        <div>
+          <h3>Nutri e Personal à Disposição</h3>
+          <p>Precisa trocar um exercício ou ajustar algo na alimentação? Tainan e equipe fazem ajustes individuais para você.</p>
+        </div>
+      </div>
+
+      <div class="deliverable-card">
+        <div class="check-icon">✓</div>
+        <div>
+          <h3>App Exclusivo + Notificações Diárias</h3>
+          <p>Lembretes inteligentes no app e grupo ativo de interação para você nunca mais desanimar sozinha.</p>
+        </div>
+      </div>
+
+      <div class="deliverable-card">
+        <div class="check-icon">✓</div>
+        <div>
+          <h3>Desafios Valendo Prêmios</h3>
+          <p>Metas práticas dentro do programa que premiam a sua constância.</p>
+        </div>
+      </div>
+
+      <div class="deliverable-card">
+        <div class="check-icon">✓</div>
+        <div>
+          <h3>+20 Modalidades de Aulas Extras e Biblioteca</h3>
+          <p>Aulas variadas para fazer quando quiser e conteúdos diretos sobre rotina, mentalidade e alimentação.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRINTS DOS COMENTÁRIOS DO INSTAGRAM -->
+    <div class="section">
+      <h2>O que nossas alunas comentam no Instagram:</h2>
+      <p class="section-desc">Avaliações reais e espontâneas de quem já faz parte do programa.</p>
+
+      <div class="ig-comments-grid">
+        <img src="comentario-1.jpg" alt="Comentário @deborahpripav" class="ig-comment-img" loading="lazy" onerror="this.style.display='none'">
+        <img src="comentario-2.jpg" alt="Comentário @danifonsi_" class="ig-comment-img" loading="lazy" onerror="this.style.display='none'">
+        <img src="comentario-3.jpg" alt="Comentário @ve.neuropsicopedagoga" class="ig-comment-img" loading="lazy" onerror="this.style.display='none'">
+        <img src="comentario-4.jpg" alt="Comentário @daydobscha" class="ig-comment-img" loading="lazy" onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <!-- FAQ / QUEBRA DE OBJEÇÕES -->
+    <div class="section">
+      <h2>Dúvidas frequentes:</h2>
+
+      <div class="faq-item">
+        <h4>"Não tenho tempo para treinar todo dia, funciona?"</h4>
+        <p>Sim! O método foi desenhado exatamente para quem tem rotina corrida e consegue treinar a partir de 3x na semana.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>"Tenho compulsão e não consigo seguir dieta..."</h4>
+        <p>A compulsão quase sempre nasce da restrição exagerada. Aqui você come comida de verdade (inclusive seu doce/chocolate dentro do cálculo) sem proibições absurdas.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>"Tem multa ou fidelidade se eu quiser cancelar?"</h4>
+        <p>Zero fidelidade. Você testa na prática e permanece apenas enquanto estiver gostando dos resultados.</p>
+      </div>
+    </div>
+
+    <!-- OFERTA FINAL -->
+    <div class="offer-box">
+      <div class="badge" style="margin-bottom: 6px;">Acesso Completo</div>
+      <h2 style="margin-bottom: 4px;">Comece sua mudança hoje</h2>
+      <p style="font-size: 13.5px; color: var(--muted);">Menos de R$ 1,35 por dia para ter treino, dieta e suporte.</p>
+      <div class="price-tag">R$ 39,90<small>/mês</small></div>
+      <p style="font-size: 13px; color: var(--muted); margin-bottom: 18px;">Liberação imediata após confirmação no Mercado Pago</p>
+
+      <a href="https://mpago.la/1kCiDS3" class="cta-btn">GARANTIR MINHA VAGA AGORA</a>
+
+      <div class="guarantee">
+        🛡️ <strong>7 Dias de Garantia Incondicional:</strong> Entre, acesse o app, veja os treinos e a dieta. Se não fizer sentido para sua rotina, devolvemos 100% do valor sem burocracia.
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
