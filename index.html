@@ -40,6 +40,7 @@
       z-index: 100;
     }
     .top-bar span { color: var(--neon-green); }
+    .top-bar s { color: #9ca3af; font-weight: 500; margin-right: 4px; }
 
     .container {
       max-width: 520px;
@@ -100,6 +101,73 @@
       font-weight: 700;
       color: var(--text);
       margin-bottom: 18px;
+    }
+
+    /* Capa Leve para Vídeos Extras (Não trava o celular) */
+    .lite-yt {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #111;
+      cursor: pointer;
+      border: 1px solid #0f0f0f;
+    }
+    .lite-yt img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.88;
+      transition: opacity 0.2s;
+    }
+    .lite-yt:hover img { opacity: 1; }
+    .lite-yt .play-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 58px; height: 58px;
+      background: var(--pink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(255, 30, 122, 0.55);
+    }
+    .lite-yt .play-btn::after {
+      content: '';
+      border-style: solid;
+      border-width: 11px 0 11px 19px;
+      border-color: transparent transparent transparent #ffffff;
+      margin-left: 4px;
+    }
+    .lite-yt iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+
+    /* Ancoragem rápida acima do primeiro botão */
+    .top-anchor-box {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .top-anchor-old {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .top-anchor-old s {
+      color: #ef4444;
+      font-weight: 700;
+    }
+    .top-anchor-new {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--text);
+    }
+    .top-anchor-new span {
+      color: var(--pink);
     }
 
     .cta-btn {
@@ -202,7 +270,7 @@
 
     /* Cards de Vídeo Depoimento */
     .testimonial-video-card {
-      flex: 0 0 76%;
+      flex: 0 0 74%;
       scroll-snap-align: center;
       background: var(--surface);
       border: 1px solid var(--border);
@@ -218,11 +286,6 @@
       padding: 4px 10px;
       border-radius: 999px;
       margin-bottom: 10px;
-    }
-    .testimonial-video-card .video-wrapper {
-      max-width: 100%;
-      margin-bottom: 0;
-      border-width: 1px;
     }
 
     /* Entregáveis */
@@ -267,16 +330,6 @@
       display: block;
     }
 
-    /* Fallback de texto caso print não carregue */
-    .ig-quote-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
-      font-size: 13.5px;
-    }
-    .ig-quote-card strong { color: var(--text); display: block; margin-bottom: 4px; }
-
     /* FAQ */
     .faq-item {
       border-bottom: 1px solid var(--border);
@@ -285,23 +338,63 @@
     .faq-item h4 { font-size: 15px; font-weight: 800; margin-bottom: 5px; }
     .faq-item p { font-size: 14px; color: var(--muted); }
 
-    /* Oferta Final */
+    /* Oferta Final com Ancoragem Forte */
     .offer-box {
       border: 2px solid var(--pink);
-      border-radius: 18px;
-      padding: 24px 16px;
+      border-radius: 20px;
+      padding: 26px 18px;
       text-align: center;
       background: #ffffff;
-      box-shadow: 0 12px 30px rgba(255, 30, 122, 0.1);
+      box-shadow: 0 14px 34px rgba(255, 30, 122, 0.12);
+    }
+    .discount-pill {
+      display: inline-block;
+      background: var(--pink);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 900;
+      padding: 5px 12px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .anchor-stack {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 12px;
+      margin: 14px 0;
+      font-size: 13px;
+      color: var(--muted);
+      text-align: left;
+    }
+    .anchor-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px dashed #d1d5db;
+    }
+    .anchor-row:last-child { border-bottom: none; }
+    .anchor-row s { color: #ef4444; font-weight: 600; }
+
+    .old-price {
+      font-size: 17px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-top: 8px;
+    }
+    .old-price s {
+      color: #ef4444;
+      font-weight: 800;
     }
     .price-tag {
-      font-size: 44px;
+      font-size: 46px;
       font-weight: 900;
       color: var(--text);
       line-height: 1;
-      margin: 10px 0 6px;
+      margin: 6px 0 6px;
+      letter-spacing: -1px;
     }
-    .price-tag small { font-size: 16px; font-weight: 600; color: var(--muted); }
+    .price-tag small { font-size: 16px; font-weight: 600; color: var(--muted); letter-spacing: 0; }
     .guarantee {
       margin-top: 16px;
       font-size: 12.5px;
@@ -316,11 +409,11 @@
 <body>
 
   <div class="top-bar">
-    VALIDADO DESDE 2018 • <span>COMECE HOJE POR R$ 39,90</span>
+    CONDIÇÃO ESPECIAL: <s>DE R$ 97,00</s> <span>POR APENAS R$ 39,90/MÊS</span>
   </div>
 
   <div class="container">
-    <div class="badge">Para quem tem rotina corrida</div>
+    <div class="badge">Validado desde 2018 • Para rotinas corridas</div>
     <h1>Emagreça e defina <span class="highlight-pink">sem dieta restritiva</span> e sem precisar treinar todo dia.</h1>
     <p class="subheadline">Assista ao vídeo abaixo de 1 minuto e veja por dentro como funciona o método feito para quem sofre com falta de tempo, desânimo ou compulsão:</p>
 
@@ -335,8 +428,13 @@
     </div>
     <p class="video-caption">🔊 Toque no vídeo acima para ver o app, treino e dieta na prática</p>
 
-    <a href="https://mpago.la/1kCiDS3" class="cta-btn">QUERO COMEÇAR AGORA POR R$ 39,90</a>
-    <p class="cta-sub">🔒 Pagamento seguro via Mercado Pago • Cancele quando quiser</p>
+    <div class="top-anchor-box">
+      <div class="top-anchor-old">De <s>R$ 97,00/mês</s> por apenas</div>
+      <div class="top-anchor-new"><span>R$ 39,90/mês</span> (Acesso Completo)</div>
+    </div>
+
+    <a href="https://payfast.greenn.com.br/193821/offer/sL2xvI" class="cta-btn">QUERO COMEÇAR AGORA POR R$ 39,90</a>
+    <p class="cta-sub">🔒 Pagamento rápido e seguro via Greenn • Cancele quando quiser</p>
 
     <div class="proof-strip">
       <div class="proof-item">
@@ -378,30 +476,33 @@
       </div>
     </div>
 
-    <!-- DEPOIMENTOS EM VÍDEO (SHORTS) -->
+    <!-- DEPOIMENTOS EM VÍDEO (CARREGAMENTO LEVE POR CLIQUE) -->
     <div class="section">
       <h2>Ouça quem já passou pelo que você sente hoje:</h2>
-      <div class="carousel-hint">👉 Arraste para assistir aos 3 relatos</div>
+      <div class="carousel-hint">👉 Arraste para o lado e toque para assistir</div>
 
       <div class="horizontal-scroll">
         <div class="testimonial-video-card">
           <span class="testimonial-tag">🍫 -10kg comendo chocolate todo dia</span>
-          <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/1l4r4RO2-ls?rel=0&modestbranding=1" title="Depoimento menos 10kg comendo chocolate" loading="lazy" allowfullscreen></iframe>
+          <div class="lite-yt" onclick="loadVideo(this, '1l4r4RO2-ls')">
+            <img src="https://i.ytimg.com/vi/1l4r4RO2-ls/hqdefault.jpg" alt="Depoimento menos 10kg comendo chocolate" loading="lazy">
+            <div class="play-btn"></div>
           </div>
         </div>
 
         <div class="testimonial-video-card">
           <span class="testimonial-tag">🧠 Eliminou a compulsão alimentar</span>
-          <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/-sVZs6fn_9U?rel=0&modestbranding=1" title="Depoimento eliminou compulsão" loading="lazy" allowfullscreen></iframe>
+          <div class="lite-yt" onclick="loadVideo(this, '-sVZs6fn_9U')">
+            <img src="https://i.ytimg.com/vi/-sVZs6fn_9U/hqdefault.jpg" alt="Depoimento eliminou compulsão" loading="lazy">
+            <div class="play-btn"></div>
           </div>
         </div>
 
         <div class="testimonial-video-card">
           <span class="testimonial-tag">⏰ Resultado mesmo na rotina corrida</span>
-          <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/aNnni_RCPYU?rel=0&modestbranding=1" title="Depoimento rotina corrida" loading="lazy" allowfullscreen></iframe>
+          <div class="lite-yt" onclick="loadVideo(this, 'aNnni_RCPYU')">
+            <img src="https://i.ytimg.com/vi/aNnni_RCPYU/hqdefault.jpg" alt="Depoimento rotina corrida" loading="lazy">
+            <div class="play-btn"></div>
           </div>
         </div>
       </div>
@@ -409,7 +510,7 @@
 
     <!-- ENTREGÁVEIS -->
     <div class="section">
-      <h2>Tudo o que você recebe hoje por R$ 39,90:</h2>
+      <h2>Tudo o que você recebe hoje:</h2>
 
       <div class="deliverable-card">
         <div class="check-icon">✓</div>
@@ -493,21 +594,35 @@
       </div>
     </div>
 
-    <!-- OFERTA FINAL -->
+    <!-- OFERTA FINAL COM ANCORAGEM -->
     <div class="offer-box">
-      <div class="badge" style="margin-bottom: 6px;">Acesso Completo</div>
-      <h2 style="margin-bottom: 4px;">Comece sua mudança hoje</h2>
-      <p style="font-size: 13.5px; color: var(--muted);">Menos de R$ 1,35 por dia para ter treino, dieta e suporte.</p>
-      <div class="price-tag">R$ 39,90<small>/mês</small></div>
-      <p style="font-size: 13px; color: var(--muted); margin-bottom: 18px;">Liberação imediata após confirmação no Mercado Pago</p>
+      <div class="discount-pill">🔥 58% DE DESCONTO HOJE</div>
+      <h2 style="margin-bottom: 4px;">Acesso Completo ao Tô Me Mexendo</h2>
+      <p style="font-size: 13.5px; color: var(--muted);">Veja quanto custaria contratar tudo separado:</p>
 
-      <a href="https://mpago.la/1kCiDS3" class="cta-btn">GARANTIR MINHA VAGA AGORA</a>
+      <div class="anchor-stack">
+        <div class="anchor-row"><span>Treino + Dieta Calculada Individual</span> <s>R$ 150,00</s></div>
+        <div class="anchor-row"><span>Suporte de Nutri e Personal</span> <s>R$ 120,00</s></div>
+        <div class="anchor-row"><span>App + Grupo + +20 Aulas Extras</span> <s>R$ 67,00</s></div>
+      </div>
+
+      <div class="old-price">Valor normal do plano: <s>R$ 97,00/mês</s></div>
+      <div class="price-tag">R$ 39,90<small>/mês</small></div>
+      <p style="font-size: 13px; color: var(--muted); margin-bottom: 18px;">Menos de R$ 1,35 por dia • Liberação rápida via Greenn</p>
+
+      <a href="https://payfast.greenn.com.br/193821/offer/sL2xvI" class="cta-btn">GARANTIR MINHA VAGA POR R$ 39,90</a>
 
       <div class="guarantee">
         🛡️ <strong>7 Dias de Garantia Incondicional:</strong> Entre, acesse o app, veja os treinos e a dieta. Se não fizer sentido para sua rotina, devolvemos 100% do valor sem burocracia.
       </div>
     </div>
   </div>
+
+  <script>
+    function loadVideo(el, videoId) {
+      el.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    }
+  </script>
 
 </body>
 </html>
