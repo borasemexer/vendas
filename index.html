@@ -77,16 +77,65 @@
       margin-bottom: 20px;
     }
 
-    /* Player Vertical Shorts */
+    /* Player VSL Horizontal (16:9) no Topo */
+    .vsl-wrapper {
+      position: relative;
+      width: 100%;
+      margin: 0 auto 14px;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+      border: 2px solid #0f0f0f;
+      background: #000;
+      cursor: pointer;
+    }
+    .vsl-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .vsl-wrapper .play-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px; height: 64px;
+      background: var(--pink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(255, 30, 122, 0.6);
+      transition: transform 0.15s ease;
+    }
+    .vsl-wrapper:hover .play-btn {
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+    .vsl-wrapper .play-btn::after {
+      content: '';
+      border-style: solid;
+      border-width: 12px 0 12px 20px;
+      border-color: transparent transparent transparent #ffffff;
+      margin-left: 4px;
+    }
+    .vsl-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+
+    /* Player Vertical Shorts (Demonstração do App) */
     .video-wrapper {
       position: relative;
       width: 100%;
-      max-width: 320px;
-      margin: 0 auto 20px;
+      max-width: 300px;
+      margin: 0 auto 12px;
       aspect-ratio: 9 / 16;
       border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
       border: 2px solid #0f0f0f;
       background: #000;
     }
@@ -101,7 +150,7 @@
       font-size: 12.5px;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 18px;
+      margin-bottom: 22px;
     }
 
     /* Capa Leve para Vídeos Extras */
@@ -505,34 +554,30 @@
     <div class="badge">Validado desde 2018 • Para rotinas corridas e dificuldade na dieta</div>
     <h1>Emagreça e defina <span class="highlight-pink">sem dieta restritiva</span> e sem precisar treinar todo dia.</h1>
 
-<a href="https://payfast.greenn.com.br/193821/offer/sL2xvI" class="cta-btn">FAÇA SUA INSCRIÇÃO</a>
-    <p class="cta-sub"> </p>
-    
-    <p class="subheadline">Assista ao vídeo abaixo de 1 minuto e veja por dentro como funciona o método feito para quem sofre com <strong>falta de tempo, desânimo ou compulsão:</strong></p>
+    <a href="https://payfast.greenn.com.br/193821/offer/sL2xvI" class="cta-btn">FAÇA SUA INSCRIÇÃO</a>
+    <p class="cta-sub"></p>
 
-    <!-- VÍDEO PRINCIPAL DE DEMONSTRAÇÃO -->
-    <div class="video-wrapper">
-      <iframe
-        src="https://www.youtube.com/embed/t22pvPgqi_o?rel=0&modestbranding=1"
-        title="Demonstração Tô Me Mexendo"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
+    <p class="subheadline">Assista ao vídeo abaixo e descubra onde você está errando e como ter resultado mesmo com <strong>falta de tempo, desânimo ou compulsão:</strong></p>
+
+    <!-- NOVO VÍDEO VSL COMO PRIMEIRO VÍDEO (PUXANDO A CAPA DIRETO DO YOUTUBE) -->
+    <div class="vsl-wrapper" onclick="loadVideo(this, 'ldSJxQsC2TU')">
+      <img src="https://i.ytimg.com/vi/ldSJxQsC2TU/maxresdefault.jpg" alt="Emagrecimento como nunca te explicaram">
+      <div class="play-btn"></div>
     </div>
-    <p class="video-caption">🔊 Toque no vídeo acima para ver o app, treino e dieta na prática</p>
+    <p class="video-caption">🔊 Toque no vídeo acima para assistir</p>
 
     <div class="top-anchor-box">
       <div class="top-anchor-old">De <s>R$97,00/mês</s> por apenas</div>
-      <div class="top-anchor-new"><span>R$39,90/mês</span> <br>(Plano completo)</br></div>
+      <div class="top-anchor-new"><span>R$39,90/mês</span> <br>(Plano completo)</div>
     </div>
 
     <a href="https://payfast.greenn.com.br/193821/offer/sL2xvI" class="cta-btn">QUERO EMAGRECER COMENDO TUDO QUE EU GOSTO</a>
-    <p class="cta-sub">🔒 Pagamento rápido e seguro via Greenn • <br>Cancele quando quiser</br></p>
+    <p class="cta-sub">🔒 Pagamento rápido e seguro via Greenn • <br>Cancele quando quiser</p>
 
     <div class="proof-strip">
       <div class="proof-item">
-        <strong>Desde <br>2018</br></strong>
-        <span>Mais de <br>3.000 alunas</br></span>
+        <strong>Desde <br>2018</strong>
+        <span>Mais de <br>3.000 alunas</span>
       </div>
       <div class="proof-item">
         <strong>Especialista</strong>
@@ -608,7 +653,7 @@
       <div class="deliverable-card">
         <div class="check-icon">✓</div>
         <div>
-          <h3>Treino para Casa ou Academia <br>(a partir de 5 MINUTOS)</br></h3>
+          <h3>Treino para Casa ou Academia <br>(a partir de 5 MINUTOS)</h3>
           <p>Treinos rápidos e eficientes — resultados sem treinar todo dia.</p>
         </div>
       </div>
@@ -649,15 +694,28 @@
         <div class="check-icon">✓</div>
         <div>
           <h3>+900 Aulas Extras (20 Modalidades) e Biblioteca de Conteúdo</h3>
-          <p>Pilates, Zumba, Yoga, Fitdance e mais... <br>Vídeos curtos sobre compulsão, rotina, desânimo, entre outros.</br></p>
+          <p>Pilates, Zumba, Yoga, Fitdance e mais... <br>Vídeos curtos sobre compulsão, rotina, desânimo, entre outros.</p>
         </div>
       </div>
     </div>
 
-    <!-- TOUR POR DENTRO DO APP (PRINTS REAIS) -->
+    <!-- TOUR POR DENTRO DO APP (VÍDEO + PRINTS REAIS) -->
     <div class="section">
       <h2>Veja por dentro do App que você terá acesso:</h2>
       <p class="section-desc">Tudo organizado na palma da sua mão, fácil de usar e sem complicação. (OBS: Os ajustes são todos INDIVIDUAIS pelo Whatsapp)</p>
+
+      <!-- VÍDEO DE DEMONSTRAÇÃO DO APP MOVIDO PARA CÁ -->
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/t22pvPgqi_o?rel=0&modestbranding=1"
+          title="Demonstração Tô Me Mexendo"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+      <p class="video-caption">🔊 Toque no vídeo acima para ver o app, treino e dieta na prática</p>
+
       <div class="carousel-hint">👉 Arraste para navegar pelas telas do app</div>
 
       <div class="horizontal-scroll">
@@ -668,17 +726,17 @@
 
         <div class="app-screen-card">
           <img src="app-2.jpg" alt="Cardápio Calculado com Sobremesa" loading="lazy">
-          <div class="app-screen-label"><span>02.</span> Dieta Calculada <br>(Até Sobremesa!)</br></div>
+          <div class="app-screen-label"><span>02.</span> Dieta Calculada <br>(Até Sobremesa!)</div>
         </div>
 
         <div class="app-screen-card">
           <img src="app-3.jpg" alt="Treino em Casa, Academia e 5 Min" loading="lazy">
-          <div class="app-screen-label"><span>03.</span> Treinos rápidos para <br>casa ou academia</br></div>
+          <div class="app-screen-label"><span>03.</span> Treinos rápidos para <br>casa ou academia</div>
         </div>
 
         <div class="app-screen-card">
           <img src="app-4.jpg" alt="Mais de 900 Aulas Extras" loading="lazy">
-          <div class="app-screen-label"><span>04.</span> +900 Aulas de <br>20 Modalidades</br></div>
+          <div class="app-screen-label"><span>04.</span> +900 Aulas de <br>20 Modalidades</div>
         </div>
 
         <div class="app-screen-card">
@@ -688,7 +746,7 @@
 
         <div class="app-screen-card">
           <img src="app-6.jpg" alt="Desafio Valendo Prêmios" loading="lazy">
-          <div class="app-screen-label"><span>06.</span> Desafios com Ranking e Prêmiação em dinheiro</div>
+          <div class="app-screen-label"><span>06.</span> Desafios com Ranking e Premiação em dinheiro</div>
         </div>
       </div>
     </div>
@@ -736,12 +794,12 @@
         <div class="anchor-row"><span>Nutricionista online</span> <s>R$200,00</s></div>
         <div class="anchor-row"><span>Personal online</span> <s>R$150,00</s></div>
         <div class="anchor-row"><span>App com treino e dieta</span> <s>R$67,00</s></div>
-        <div class="anchor-row"><span><strong>TOTAL(sem incentivo)</strong></span> <s><strong>R$417,00</strong></s></div>
+        <div class="anchor-row"><span><strong>TOTAL (sem incentivo)</strong></span> <s><strong>R$417,00</strong></s></div>
       </div>
 
       <div class="old-price">Valor do Tô Me Mexendo: <s>R$97,00/mês</s></div>
       <div class="price-tag">R$39,90<small>/mês</small></div>
-      <p style="font-size: 13px; color: var(--muted); margin-bottom: 18px;">• Menos de R$1,35 por dia • <br>• Nutri + Personal + Incentivo + Suporte individual + App completo •</br>• Liberação Imediata •</p>
+      <p style="font-size: 13px; color: var(--muted); margin-bottom: 18px;">• Menos de R$1,35 por dia • <br>• Nutri + Personal + Incentivo + Suporte individual + App completo •<br>• Liberação Imediata •</p>
 
       <a href="https://payfast.greenn.com.br/193821/offer/sL2xvI" class="cta-btn">QUERO EMAGRECER COM A ROTINA CORRIDA</a>
 
@@ -791,13 +849,6 @@
       }
     })();
   </script>
-
-</body>
-
-
-</body>
-</html>
-
 
 </body>
 </html>
