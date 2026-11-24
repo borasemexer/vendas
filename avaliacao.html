@@ -52,7 +52,7 @@
     }
     .progress-fill {
       height: 100%;
-      width: 11%;
+      width: 10%;
       background: linear-gradient(90deg, var(--pink), var(--neon-green));
       transition: width 0.35s ease;
     }
@@ -274,7 +274,7 @@
       padding: 18px 16px;
       margin-bottom: 16px;
     }
-    .highlight-box strong.green { color: var(--neon-green); font-size: 26px; display: block; margin: 4px 0; }
+    .highlight-box strong.green { color: var(--neon-green); font-size: 24px; display: block; margin: 4px 0; }
 
     .pink-note {
       background: #fff5f9;
@@ -283,6 +283,21 @@
       border-radius: 0 12px 12px 0;
       font-size: 14px;
       margin-bottom: 16px;
+    }
+
+    .emphasis-banner {
+      background: #fff5f9;
+      border: 1.5px solid var(--pink);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 10px;
+    }
+    .emphasis-banner strong {
+      color: var(--pink);
+      font-weight: 900;
     }
 
     /* Cardápio Exemplo */
@@ -526,7 +541,7 @@
 
     <!-- 1) QUAL O SEU OBJETIVO? -->
     <div class="step active" id="step1">
-      <div class="step-indicator">Pergunta 1 de 9</div>
+      <div class="step-indicator">Etapa 1 de 10</div>
       <h1>Qual o seu <span>objetivo</span> hoje?</h1>
       <p class="subtitle">Selecione uma opção abaixo para iniciarmos sua avaliação gratuita:</p>
 
@@ -540,7 +555,7 @@
 
     <!-- 2) QUAL O SEU PESO ATUAL? -->
     <div class="step" id="step2">
-      <div class="step-indicator">Pergunta 2 de 9</div>
+      <div class="step-indicator">Etapa 2 de 10</div>
       <h2>Qual o seu <span>peso atual</span>?</h2>
       <p class="subtitle">Informe seu peso aproximado para calcularmos sua necessidade calórica diária:</p>
 
@@ -557,7 +572,7 @@
 
     <!-- 3) CITE SUAS PRINCIPAIS DIFICULDADES -->
     <div class="step" id="step3">
-      <div class="step-indicator">Pergunta 3 de 9</div>
+      <div class="step-indicator">Etapa 3 de 10</div>
       <h2>Cite suas <span>principais dificuldades</span></h2>
       <p class="subtitle">Você pode selecionar mais de uma opção:</p>
 
@@ -591,9 +606,13 @@
       <h2>O que você precisa para <span id="goalDisplay">perder peso</span> é:</h2>
 
       <div class="info-card">
-        <p style="font-weight: 800; font-size: 16px; margin-bottom: 8px;">🏋️‍♀️ Fazer no mínimo 2 dias de treino <span style="color: var(--pink);">(sim, só isso é suficiente)</span></p>
-        <p style="margin-bottom: 10px;">• <strong>Casa:</strong> ~20min ou <strong>Academia:</strong> ~40min</p>
-        <p style="color: var(--muted);">Isso vai estimular sua massa muscular e fazer seu corpo queimar muita gordura.</p>
+        <p style="font-weight: 900; font-size: 18.5px; line-height: 1.28; margin-bottom: 10px;">
+          🏋️‍♀️ Fazer, no mínimo, <span style="color: var(--pink);">2 dias de treino</span> <span style="font-size: 15.5px; font-weight: 800;">(sim, só isso é suficiente)</span>
+        </p>
+        <p style="margin-bottom: 12px; font-size: 15px;">• <strong>Casa:</strong> ~20min ou <strong>Academia:</strong> ~40min</p>
+        <div class="emphasis-banner">
+          Isso vai estimular sua <strong>massa muscular</strong> e fazer seu corpo <strong>queimar muita gordura.</strong> 🔥🔥
+        </div>
       </div>
 
       <p style="font-weight: 800; font-size: 14.5px; text-align: center;">Veja esse resultado pra comprovar 👇</p>
@@ -608,12 +627,12 @@
     <!-- 5) DIETA E CALORIAS + ESCALA 0 A 10 -->
     <div class="step" id="step5">
       <div class="step-indicator">Avaliação do Seu Caso • Parte 2</div>
-      <h2>Você precisa de <span id="kcalTitle">1.700 kcal</span> por dia</h2>
+      <h2>Você precisa de <span id="kcalTitle">1.700kcal</span> por dia</h2>
 
       <div class="highlight-box">
-        <span style="font-size: 12px; font-weight: 700; color: #d1d5db;">RECOMENDADO PARA O SEU PESO (<span id="weightDisplay">75</span> KG):</span>
+        <span style="font-size: 12px; font-weight: 700; color: #d1d5db;">RECOMENDADO PARA O SEU PESO (<span id="weightDisplay">75</span>KG):</span>
         <strong class="green">Mínimo 4 refeições por dia + sobremesa</strong>
-        <p style="font-size: 13.5px; color: #e5e7eb; margin-top: 6px;">Isso vai fazer seu <strong>metabolismo acelerar</strong> (se está chegando nutrientes, seu corpo gasta mais).</p>
+        <p style="font-size: 14px; color: #e5e7eb; margin-top: 8px;">⚡ Isso vai fazer seu <strong style="color: var(--neon-green);">metabolismo acelerar</strong> (se está chegando nutrientes, seu corpo gasta mais).</p>
       </div>
 
       <div class="pink-note">
@@ -658,7 +677,7 @@
 
     <!-- 6) O MAIS DIFÍCIL É MANTER -->
     <div class="step" id="step6">
-      <div class="step-indicator">Pergunta 6 de 9</div>
+      <div class="step-indicator">Etapa 6 de 10</div>
       <h2>Viu como <span>não é tão difícil</span>?</h2>
       <div class="info-card" style="font-size: 15.5px;">
         <p style="margin-bottom: 10px;">O mais difícil é <strong>MANTER</strong>. Né?</p>
@@ -687,24 +706,41 @@
       <button class="secondary-btn" onclick="goToStep(8)">NÃO TOMO BANHO TODO DIA</button>
     </div>
 
-    <!-- 8) VÍDEO 3 MINUTOS + PROPOSTA DE VALOR + RESULTADOS -->
+    <!-- 8) VÍDEO DO MÉTODO DE 12 SEMANAS -->
     <div class="step" id="step8">
       <div class="step-indicator">O Método • 12 Semanas</div>
       <h2>A lógica pra você ter resultado é ter um passo a passo pra criar <span>constância</span>. Dessa forma, fica tudo automático.</h2>
-      <p class="subtitle">Se você tiver 3min, veja esse vídeo, onde explico um método <strong>INFALÍVEL</strong> pra você criar constância em 12 semanas! <strong>(VOCÊ VAI SE SURPREENDER, SÉRIO)</strong></p>
+
+      <div class="info-card" style="font-size: 15px; line-height: 1.55;">
+        <p style="margin-bottom: 10px;">Com <strong>mais de 10 anos de Experiência</strong> sendo <strong>Nutri, Personal e Especialista em Mudança de Hábitos</strong>, criei essa forma <strong>INFALÍVEL</strong> pra você criar <span style="color: var(--pink); font-weight: 900;">constância em 12 semanas!</span></p>
+        <p style="font-weight: 800; color: var(--text);">São 10 anos em 3 minutos. Vale a pena ver 🙌🏻</p>
+        <p style="font-size: 13px; font-weight: 900; color: var(--pink); margin-top: 4px;">(VOCÊ VAI SE SURPREENDER, SÉRIO)</p>
+      </div>
 
       <div class="lite-yt" onclick="loadVideo(this, 'ldSJxQsC2TU')">
         <img src="capa-vsl.jpg" alt="Método Infalível 12 Semanas" onerror="this.src='https://i.ytimg.com/vi/ldSJxQsC2TU/hqdefault.jpg'">
       </div>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 22px;">
-        <button class="cta-btn" style="font-size: 13.5px; padding: 14px 8px; margin: 0;" onclick="document.getElementById('valueAnchor').scrollIntoView({behavior:'smooth'})">✓ VI O VÍDEO</button>
-        <button class="secondary-btn" style="font-size: 13.5px; padding: 14px 8px; margin: 0;" onclick="document.getElementById('valueAnchor').scrollIntoView({behavior:'smooth'})">NÃO VI O VÍDEO</button>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+        <button class="cta-btn" style="font-size: 14px; padding: 15px 8px; margin: 0;" onclick="goToStep(9)">✓ VI O VÍDEO</button>
+        <button class="secondary-btn" style="font-size: 14px; padding: 15px 8px; margin: 0;" onclick="goToStep(9)">NÃO VI O VÍDEO</button>
       </div>
+    </div>
 
-      <div id="valueAnchor" class="info-card" style="border: 2px solid #0f0f0f;">
-        <h3 style="font-size: 18px; font-weight: 900; margin-bottom: 12px;">Você pagaria <span style="color: var(--pink);">R$ 39,90</span> para ter acesso a essa ferramenta, mais:</h3>
-        <ul style="list-style: none; font-size: 14.5px; line-height: 1.8;">
+    <!-- 9) TRANSIÇÃO PARA A OFERTA (PRESENTE + ENTREGÁVEIS + RESULTADOS) -->
+    <div class="step" id="step9">
+      <div class="step-indicator">Etapa 9 de 10 • Presente Liberado</div>
+      <h2>Agora tenho um <span>presente</span> pra você 🎁</h2>
+      <p style="font-size: 15.5px; font-weight: 800; margin-bottom: 14px;">Mas antes, responda com <span style="color: var(--pink);">SINCERIDADE</span>:</p>
+
+      <div class="info-card" style="border: 2px solid #0f0f0f;">
+        <h3 style="font-size: 17.5px; font-weight: 900; line-height: 1.3; margin-bottom: 12px;">
+          Se fosse um valor viável <span style="color: var(--pink);">(menos de R$1,35 por dia)</span>, você investiria para ter:
+        </h3>
+        <p style="font-weight: 900; font-size: 15px; background: #fff5f9; padding: 10px 12px; border-radius: 10px; border-left: 4px solid var(--pink); margin-bottom: 12px;">
+          Uma ferramenta INFALÍVEL pra vc criar Constância em 12 semanas +
+        </p>
+        <ul style="list-style: none; font-size: 14.5px; line-height: 1.85;">
           <li>✅ Treino personalizado</li>
           <li>✅ Dieta calculada com várias opções</li>
           <li>✅ Ajustes individuais no WhatsApp</li>
@@ -727,11 +763,11 @@
         <div class="ba-card"><img src="antes-depois-6.png" alt="Antes e Depois 6" loading="lazy"></div>
       </div>
 
-      <button class="cta-btn" onclick="goToStep(9)">SIM, EU PAGARIA! VER OFERTA ESPECIAL →</button>
+      <button class="cta-btn" onclick="goToStep(10)">SIM, EU INVESTIRIA! VER PRESENTE →</button>
     </div>
 
-    <!-- 9) OFERTA ESPECIAL COM TIMER 15MIN + PLANOS + PROVA SOCIAL -->
-    <div class="step" id="step9">
+    <!-- 10) OFERTA ESPECIAL COM TIMER 15MIN + PLANOS + PROVA SOCIAL -->
+    <div class="step" id="step10">
       <div class="timer-banner">
         <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase;">⏳ Oferta especial expira em:</div>
         <span id="countdownTimer">15:00</span>
@@ -744,10 +780,10 @@
         <div class="plan-badge" style="background: #0f0f0f;">Plano de 12 Semanas</div>
         <h3 style="font-size: 18px; font-weight: 900;">Acesso Completo por 3 Meses</h3>
         <div class="plan-price">
-          <s>De 3x de R$ 159,60</s>
-          Agora por 3x de R$ 79,80 <small style="font-size: 13px; font-weight: 600; color: var(--muted);">sem juros</small>
+          <s>De 3x de R$159,60</s>
+          Agora por 3x de R$79,80 <small style="font-size: 13px; font-weight: 600; color: var(--muted);">sem juros</small>
         </div>
-        <a href="#" id="btnTrimestral" class="cta-btn-pink">1) QUERO O DE 3 MESES POR 3X DE R$ 79,80</a>
+        <a href="#" id="btnTrimestral" class="cta-btn-pink">1) QUERO O DE 3 MESES POR 3X DE R$79,80</a>
       </div>
 
       <!-- PLANO ANUAL (MAIS VANTAJOSO) -->
@@ -755,19 +791,19 @@
         <div class="plan-badge">🔥 Mais Escolhido • 50% OFF</div>
         <h3 style="font-size: 18px; font-weight: 900;">Plano Anual (1 Ano Completo)</h3>
         <div class="plan-price">
-          <s>De 12x de R$ 79,80</s>
-          Agora por 12x de R$ 39,90 <small style="font-size: 13px; font-weight: 600; color: var(--muted);">sem juros</small>
+          <s>De 12x de R$79,80</s>
+          Agora por 12x de R$39,90 <small style="font-size: 13px; font-weight: 600; color: var(--muted);">sem juros</small>
         </div>
-        <a href="#" id="btnAnual" class="cta-btn">2) QUERO O DE 1 ANO POR 12X DE R$ 39,90</a>
+        <a href="#" id="btnAnual" class="cta-btn">2) QUERO O DE 1 ANO POR 12X DE R$39,90</a>
       </div>
 
       <div style="margin: 22px 0;">
         <p style="font-weight: 900; font-size: 16px; margin-bottom: 10px;">3 meses ou 1 ano vão passar de qualquer jeito. Você tem 2 opções:</p>
         <div class="choice-box">
-          <strong>Opção 1)</strong> Continuar sempre tentando focar 100% sem direção, começar e parar. E daqui 1 ano estar do mesmo jeito.
+          <strong>Opção 1)</strong> Continuar tentando focar 100%, (sempre que bater o desespero) sem direção, começar e parar. E daqui 1 ano estar do mesmo jeito.
         </div>
         <div class="choice-box good">
-          <strong>Opção 2)</strong> Começar com um método criado pra quem tem dificuldade. Com direção e incentivo diário.
+          <strong>Opção 2)</strong> Começar com um método criado pra quem tem dificuldade. Com direção, incentivo diário e acompanhamento individual no WhatsApp.
         </div>
       </div>
 
@@ -814,8 +850,8 @@
     let timerStarted = false;
 
     const progressMap = {
-      1: '11%', 2: '22%', 3: '33%', 4: '44%', 5: '56%',
-      6: '67%', 7: '78%', 8: '89%', 9: '100%'
+      1: '10%', 2: '20%', 3: '30%', 4: '40%', 5: '50%',
+      6: '60%', 7: '70%', 8: '80%', 9: '90%', 10: '100%'
     };
 
     function goToStep(stepNumber) {
@@ -824,7 +860,7 @@
       document.getElementById('progressBar').style.width = progressMap[stepNumber];
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      if (stepNumber === 9 && !timerStarted) {
+      if (stepNumber === 10 && !timerStarted) {
         startTimer(15 * 60);
         timerStarted = true;
       }
@@ -847,11 +883,11 @@
       userWeight = val;
 
       // Regra exata de calorias por faixa de peso:
-      let kcal = '1.700 kcal';
+      let kcal = '1.700kcal';
       if (userWeight > 120) {
-        kcal = '2.300 kcal';
+        kcal = '2.300kcal';
       } else if (userWeight >= 90) {
-        kcal = '2.000 kcal';
+        kcal = '2.000kcal';
       }
 
       document.getElementById('weightDisplay').textContent = userWeight;
