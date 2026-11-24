@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avaliação Gratuita | Tô Me Mexendo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f8f9fa;
+      --text: #0f0f0f;
+      --muted: #4b5563;
+      --pink: #ff1e7a;
+      --neon-green: #22e559;
+      --wa-green: #25d366;
+      --border: #e5e7eb;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .top-bar {
+      background: #0f0f0f;
+      color: #ffffff;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 10px 12px;
+      letter-spacing: 0.4px;
+    }
+    .top-bar span { color: var(--neon-green); }
+
+    .progress-wrap {
+      width: 100%;
+      height: 6px;
+      background: #e5e7eb;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 16%;
+      background: linear-gradient(90deg, var(--pink), var(--neon-green));
+      transition: width 0.35s ease;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px 16px 64px;
+    }
+
+    .step-indicator {
+      display: inline-block;
+      background: rgba(255, 30, 122, 0.1);
+      color: var(--pink);
+      font-weight: 800;
+      font-size: 11.5px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .step { display: none; animation: fadeIn 0.3s ease; }
+    .step.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1, h2 {
+      font-size: 24px;
+      line-height: 1.2;
+      font-weight: 900;
+      letter-spacing: -0.4px;
+      margin-bottom: 10px;
+    }
+    h1 span, h2 span { color: var(--pink); }
+
+    .subtitle {
+      font-size: 14.5px;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    /* Botões de Opção do Quiz */
+    .option-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .option-btn:hover, .option-btn:active {
+      border-color: var(--pink);
+      background: #fff5f9;
+      transform: scale(0.99);
+    }
+    .option-arrow {
+      color: var(--pink);
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    /* Campo de Peso */
+    .weight-box {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .weight-input-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .weight-input {
+      width: 120px;
+      font-size: 36px;
+      font-weight: 900;
+      text-align: center;
+      padding: 10px;
+      border: 2px solid #0f0f0f;
+      border-radius: 12px;
+      font-family: inherit;
+      color: var(--text);
+    }
+    .weight-input:focus {
+      outline: none;
+      border-color: var(--pink);
+    }
+    .weight-unit {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--muted);
+    }
+    .error-msg {
+      color: #ef4444;
+      font-size: 13px;
+      font-weight: 700;
+      display: none;
+      margin-top: 6px;
+    }
+
+    /* Botão Principal Verde Neon */
+    .cta-btn {
+      display: block;
+      width: 100%;
+      background: var(--neon-green);
+      color: #051b0b;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      font-family: inherit;
+      font-weight: 900;
+      font-size: 16px;
+      padding: 18px 18px;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(34, 229, 89, 0.35);
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: transform 0.15s ease;
+    }
+    .cta-btn:active { transform: scale(0.98); }
+
+    /* Cards de Diagnóstico */
+    .result-card {
+      background: #0f0f0f;
+      color: #ffffff;
+      border-radius: 18px;
+      padding: 20px 18px;
+      margin-bottom: 18px;
+    }
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .metric-box {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 12px 10px;
+      text-align: center;
+    }
+    .metric-box strong {
+      display: block;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--neon-green);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .metric-box span {
+      font-size: 11.5px;
+      color: #d1d5db;
+      font-weight: 600;
+    }
+
+    .diagnosis-note {
+      background: #fff5f9;
+      border-left: 4px solid var(--pink);
+      padding: 14px;
+      border-radius: 0 12px 12px 0;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .pillar-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+    .pillar-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+    .pillar-item:last-child { margin-bottom: 0; }
+    .check-badge {
+      background: var(--neon-green);
+      color: #000;
+      font-weight: 900;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    /* Prova Social Compacta */
+    .mini-proof {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 18px;
+    }
+    .mini-proof img {
+      width: 72%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    /* Oferta Final */
+    .offer-box {
+      border: 2px solid var(--pink);
+      border-radius: 20px;
+      padding: 24px 16px;
+      text-align: center;
+      background: #ffffff;
+      box-shadow: 0 14px 34px rgba(255, 30, 122, 0.14);
+    }
+    .discount-pill {
+      display: inline-block;
+      background: var(--pink);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 900;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .old-price {
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-top: 8px;
+    }
+    .old-price s { color: #ef4444; }
+    .price-tag {
+      font-size: 44px;
+      font-weight: 900;
+      line-height: 1;
+      margin: 6px 0;
+      letter-spacing: -1px;
+    }
+    .price-tag small { font-size: 16px; font-weight: 600; color: var(--muted); }
+    .guarantee {
+      margin-top: 14px;
+      font-size: 12.5px;
+      color: var(--muted);
+      background: var(--surface);
+      padding: 12px;
+      border-radius: 10px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    AVALIAÇÃO GRATUITA • <span>PLANO DE CONSTÂNCIA EM 12 SEMANAS</span>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-fill" id="progressBar"></div>
+  </div>
+
+  <div class="container">
+
+    <!-- ETAPA 1: OBJETIVO -->
+    <div class="step active" id="step1">
+      <div class="step-indicator">Etapa 1 de 6 • Seu Objetivo</div>
+      <h1>Descubra quantas calorias e treinos você precisa para <span>emagrecer sem sofrer</span></h1>
+      <p class="subtitle">Responda 4 perguntas rápidas para gerar seu diagnóstico gratuito personalizado:</p>
+
+      <p style="font-weight: 800; font-size: 15px; margin-bottom: 12px;">Qual é o seu principal objetivo hoje?</p>
+
+      <button class="option-btn" onclick="setGoal('eliminar até 5 kg', 24)">
+        <span>Perder até 5 kg e desinchar</span>
+        <span class="option-arrow">→</span>
+      </button>
+      <button class="option-btn" onclick="setGoal('eliminar de 5 a 10 kg', 22)">
+        <span>Perder de 5 a 10 kg com saúde</span>
+        <span class="option-arrow">→</span>
+      </button>
+      <button class="option-btn" onclick="setGoal('eliminar mais de 10 kg', 21)">
+        <span>Perder mais de 10 kg definitivamente</span>
+        <span class="option-arrow">→</span>
+      </button>
+      <button class="option-btn" onclick="setGoal('definir o corpo e perder barriga', 25)">
+        <span>Definir o corpo e perder gordura localizada</span>
+        <span class="option-arrow">→</span>
+      </button>
+    </div>
+
+    <!-- ETAPA 2: PESO ATUAL -->
+    <div class="step" id="step2">
+      <div class="step-indicator">Etapa 2 de 6 • Cálculo Metabólico</div>
+      <h2>Qual é o seu <span>peso atual</span> aproximado?</h2>
+      <p class="subtitle">Usamos esse dado para calcular uma faixa calórica segura onde você emagrece comendo comida normal e sobremesa.</p>
+
+      <div class="weight-box">
+        <label for="weightInput" style="font-size: 13px; font-weight: 700; color: var(--muted);">Digite seu peso em quilos:</label>
+        <div class="weight-input-wrap">
+          <input type="number" id="weightInput" class="weight-input" placeholder="72" min="35" max="250" inputmode="numeric">
+          <span class="weight-unit">kg</span>
+        </div>
+        <div class="error-msg" id="weightError">Por favor, digite um peso válido entre 35 e 250 kg.</div>
+      </div>
+
+      <button class="cta-btn" onclick="saveWeight()">CONTINUAR AVALIAÇÃO →</button>
+    </div>
+
+    <!-- ETAPA 3: MAIOR DIFICULDADE -->
+    <div class="step" id="step3">
+      <div class="step-indicator">Etapa 3 de 6 • Sua Rotina</div>
+      <h2>O que mais te faz <span>parar no meio do caminho</span> hoje?</h2>
+      <p class="subtitle">Seja sincera — é exatamente isso que vamos adaptar no seu plano:</p>
+
+      <button class="option-btn" onclick="setObstacle('falta de tempo na rotina corrida')">
+        <span>Falta de tempo / rotina muito corrida</span>
+        <span class="option-arrow">→</span>
+      </button>
+      <button class="option-btn" onclick="setObstacle('compulsão por doces e ansiedade')">
+        <span>Compulsão por doces e dietas muito restritivas</span>
+        <span class="option-arrow">→</span>
+      </button>
+      <button class="option-btn" onclick="setObstacle('desânimo por tentar sozinha')">
+        <span>Desânimo e falta de motivação por fazer sozinha</span>
+        <span class="option-arrow">→</span>
+      </button>
+      <button class="option-btn" onclick="setObstacle('não saber o que comer ou treinar')">
+        <span>Fico perdida sem saber o que comer ou treinar</span>
+        <span class="option-arrow">→</span>
+      </button>
+    </div>
+
+    <!-- ETAPA 4: RESULTADO DA AVALIAÇÃO GRATUITA -->
+    <div class="step" id="step4">
+      <div class="step-indicator">Etapa 4 de 6 • Seu Resultado Pronto</div>
+      <h2>Seu diagnóstico para <span id="goalDisplay">eliminar peso</span>:</h2>
+      <p class="subtitle">Para atingir seu objetivo sem efeito sanfona e vencendo a <strong id="obstacleDisplay">falta de tempo</strong>, é disso que você precisa:</p>
+
+      <div class="result-card">
+        <div style="font-size: 12px; font-weight: 800; color: var(--neon-green); text-transform: uppercase;">Meta Diária Estimada (Peso: <span id="weightDisplay">70</span> kg)</div>
+        <div class="result-grid">
+          <div class="metric-box">
+            <strong id="caloriesDisplay">1.540 kcal</strong>
+            <span>4 refeições + sobremesa todo dia</span>
+          </div>
+          <div class="metric-box">
+            <strong>3x / semana</strong>
+            <span>Treinos rápidos (a partir de 5 min)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="diagnosis-note">
+        <strong>Por que isso funciona:</strong> Você não precisa viver na academia nem cortar o que gosta. Com <strong id="caloriesInline">1.540 kcal</strong> bem distribuídas em <strong>4 refeições + 1 sobremesa diária</strong> e apenas <strong>3 treinos na semana</strong> (em casa ou academia), seu corpo entra em déficit calórico sem gerar compulsão.
+      </div>
+
+      <p style="font-weight: 800; font-size: 15.5px; margin-bottom: 12px; text-align: center;">Você acha possível encaixar 3 treinos rápidos na semana e comer 4 refeições + sobremesa na sua rotina?</p>
+
+      <button class="cta-btn" onclick="goToStep(5)">SIM, ACHO TOTALMENTE POSSÍVEL!</button>
+    </div>
+
+    <!-- ETAPA 5: COMO FUNCIONA O MÉTODO (12 SEMANAS) -->
+    <div class="step" id="step5">
+      <div class="step-indicator">Etapa 5 de 6 • O Método</div>
+      <h2>Criamos um método para você ter <span>constância em 12 semanas</span> sem sofrer</h2>
+      <p class="subtitle">Veja como o <strong>Tô Me Mexendo</strong> (validado desde 2018 com +3.000 alunas) garante que você não desista:</p>
+
+      <div class="pillar-list">
+        <div class="pillar-item">
+          <div class="check-badge">✓</div>
+          <div><strong>Dieta Calculada com Sobremesa:</strong> Cardápio feito para o seu peso e objetivo, sem terrorismo nutricional.</div>
+        </div>
+        <div class="pillar-item">
+          <div class="check-badge">✓</div>
+          <div><strong>3 Treinos na Semana (Casa ou Academia):</strong> Treinos objetivos e opções de <strong>5 minutos</strong> para dias super corridos + 900 aulas extras.</div>
+        </div>
+        <div class="pillar-item">
+          <div class="check-badge">✓</div>
+          <div><strong>Nutri e Personal no WhatsApp:</strong> Precisou trocar um alimento ou exercício? Ajustamos individualmente para você.</div>
+        </div>
+        <div class="pillar-item">
+          <div class="check-badge">✓</div>
+          <div><strong>App + Desafios Valendo Prêmios:</strong> Lembretes diários no celular e grupo de incentivo para você nunca caminhar sozinha.</div>
+        </div>
+      </div>
+
+      <div class="mini-proof">
+        <img src="antes-depois-1.png" alt="Resultado Tô Me Mexendo 1" loading="lazy">
+        <img src="antes-depois-2.png" alt="Resultado Tô Me Mexendo 2" loading="lazy">
+        <img src="antes-depois-3.png" alt="Resultado Tô Me Mexendo 3" loading="lazy">
+      </div>
+
+      <p style="font-weight: 800; font-size: 15.5px; margin-bottom: 12px; text-align: center;">Se esse acompanhamento completo (Nutri + Personal + App) fosse viável para o seu bolso hoje, você investiria em você?</p>
+
+      <button class="cta-btn" onclick="goToStep(6)">SIM, QUERO VER A CONDIÇÃO ESPECIAL!</button>
+    </div>
+
+    <!-- ETAPA 6: OFERTA DESBLOQUEADA -->
+    <div class="step" id="step6">
+      <div class="step-indicator">Etapa 6 de 6 • Condição Liberada</div>
+      <h2>Seu plano personalizado está <span>pronto para começar hoje</span></h2>
+      <p class="subtitle">Acesso imediato ao aplicativo, sua dieta calculada com sobremesa, treinos e suporte individual no WhatsApp:</p>
+
+      <div class="offer-box">
+        <div class="discount-pill">🔥 58% DE DESCONTO LIBERADO</div>
+        <h3 style="font-size: 19px; font-weight: 900;">Plano Completo Tô Me Mexendo</h3>
+
+        <div class="old-price">De <s>R$ 97,00/mês</s> por apenas:</div>
+        <div class="price-tag">R$ 39,90<small>/mês</small></div>
+        <p style="font-size: 13px; color: var(--muted); margin-bottom: 16px;">
+          • Menos de R$ 1,35 por dia •<br>
+          • Nutri + Personal + App + Grupo de Incentivo •<br>
+          • Sem fidelidade: cancele quando quiser •
+        </p>
+
+        <a href="https://payfast.greenn.com.br/193821/offer/sL2xvI" class="cta-btn checkout-link">QUERO COMEÇAR MEU PLANO AGORA</a>
+
+        <div class="guarantee">
+          🛡️ <strong>7 Dias de Garantia Incondicional:</strong> Entre, receba seu plano alimentar e treinos, fale com a equipe no WhatsApp. Se não fizer sentido para a sua rotina, devolvemos 100% do valor.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Dados armazenados da avaliação
+    let userData = {
+      goalText: 'eliminar peso',
+      kcalFactor: 23,
+      weight: 70,
+      obstacle: 'falta de tempo'
+    };
+
+    const progressMap = {
+      1: '16%',
+      2: '33%',
+      3: '50%',
+      4: '68%',
+      5: '85%',
+      6: '100%'
+    };
+
+    function goToStep(stepNumber) {
+      document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+      document.getElementById('step' + stepNumber).classList.add('active');
+      document.getElementById('progressBar').style.width = progressMap[stepNumber];
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setGoal(goalText, factor) {
+      userData.goalText = goalText;
+      userData.kcalFactor = factor;
+      goToStep(2);
+    }
+
+    function saveWeight() {
+      const val = parseFloat(document.getElementById('weightInput').value);
+      const errorEl = document.getElementById('weightError');
+      if (!val || val < 35 || val > 250) {
+        errorEl.style.display = 'block';
+        return;
+      }
+      errorEl.style.display = 'none';
+      userData.weight = Math.round(val);
+      goToStep(3);
+    }
+
+    function setObstacle(obstacleText) {
+      userData.obstacle = obstacleText;
+
+      // Calcula calorias estimadas (mínimo seguro de 1350 kcal, arredondado de 50 em 50)
+      let rawKcal = userData.weight * userData.kcalFactor;
+      if (rawKcal < 1350) rawKcal = 1350;
+      if (rawKcal > 2400) rawKcal = 2400;
+      const finalKcal = Math.round(rawKcal / 50) * 50;
+      const formattedKcal = finalKcal.toLocaleString('pt-BR') + ' kcal';
+
+      // Atualiza os textos personalizados na Etapa 4
+      document.getElementById('goalDisplay').textContent = userData.goalText;
+      document.getElementById('obstacleDisplay').textContent = userData.obstacle;
+      document.getElementById('weightDisplay').textContent = userData.weight;
+      document.getElementById('caloriesDisplay').textContent = formattedKcal;
+      document.getElementById('caloriesInline').textContent = formattedKcal;
+
+      goToStep(4);
+    }
+
+    // Rastreamento automático de Afiliados da Greenn (?a_id=...)
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const affId = params.get('a_id');
+      if (affId) {
+        localStorage.setItem('tmm_greenn_aid', affId);
+      }
+      const savedAid = localStorage.getItem('tmm_greenn_aid');
+      if (savedAid) {
+        const affCheckoutUrl = 'https://payfast.greenn.com.br/193821/?a_id=' + encodeURIComponent(savedAid);
+        document.querySelectorAll('a.checkout-link').forEach(function(btn) {
+          btn.href = affCheckoutUrl;
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
