@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avaliação Gratuita | Tô Me Mexendo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f8f9fa;
+      --text: #0f0f0f;
+      --muted: #4b5563;
+      --pink: #ff1e7a;
+      --neon-green: #22e559;
+      --wa-green: #25d366;
+      --border: #e5e7eb;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .top-bar {
+      background: #0f0f0f;
+      color: #ffffff;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 10px 12px;
+      letter-spacing: 0.4px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .top-bar span { color: var(--neon-green); }
+
+    .progress-wrap {
+      width: 100%;
+      height: 6px;
+      background: #e5e7eb;
+      position: sticky;
+      top: 37px;
+      z-index: 99;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 10%;
+      background: linear-gradient(90deg, var(--pink), var(--neon-green));
+      transition: width 0.35s ease;
+    }
+
+    .container {
+      max-width: 490px;
+      margin: 0 auto;
+      padding: 24px 16px 72px;
+    }
+
+    .step-indicator {
+      display: inline-block;
+      background: rgba(255, 30, 122, 0.1);
+      color: var(--pink);
+      font-weight: 800;
+      font-size: 11.5px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .step { display: none; animation: fadeIn 0.3s ease; }
+    .step.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1, h2 {
+      font-size: 23px;
+      line-height: 1.22;
+      font-weight: 900;
+      letter-spacing: -0.4px;
+      margin-bottom: 12px;
+    }
+    h1 span, h2 span { color: var(--pink); }
+
+    .subtitle {
+      font-size: 14.5px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    /* Botões de Opção Única */
+    .option-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 15px 16px;
+      margin-bottom: 10px;
+      font-family: inherit;
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .option-btn:hover, .option-btn:active {
+      border-color: var(--pink);
+      background: #fff5f9;
+      transform: scale(0.99);
+    }
+    .option-arrow { color: var(--pink); font-weight: 900; font-size: 18px; }
+
+    /* Múltipla Escolha (Checkboxes Etapa 3) */
+    .multi-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 15px 16px;
+      margin-bottom: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .multi-option.selected {
+      border-color: var(--pink);
+      background: #fff5f9;
+    }
+    .custom-check {
+      width: 22px;
+      height: 22px;
+      border: 2px solid #9ca3af;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      color: #fff;
+      flex-shrink: 0;
+      background: #fff;
+    }
+    .multi-option.selected .custom-check {
+      background: var(--pink);
+      border-color: var(--pink);
+    }
+
+    /* Campo de Peso */
+    .weight-box {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .weight-input-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .weight-input {
+      width: 130px;
+      font-size: 38px;
+      font-weight: 900;
+      text-align: center;
+      padding: 10px;
+      border: 2px solid #0f0f0f;
+      border-radius: 12px;
+      font-family: inherit;
+    }
+    .weight-input:focus { outline: none; border-color: var(--pink); }
+    .weight-unit { font-size: 20px; font-weight: 800; color: var(--muted); }
+    .error-msg {
+      color: #ef4444;
+      font-size: 13px;
+      font-weight: 700;
+      display: none;
+      margin-top: 6px;
+    }
+
+    /* Botões CTA */
+    .cta-btn {
+      display: block;
+      width: 100%;
+      background: var(--neon-green);
+      color: #051b0b;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      font-family: inherit;
+      font-weight: 900;
+      font-size: 15.5px;
+      padding: 17px 16px;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(34, 229, 89, 0.35);
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: transform 0.15s ease;
+      margin-bottom: 10px;
+    }
+    .cta-btn:active { transform: scale(0.98); }
+
+    .secondary-btn {
+      display: block;
+      width: 100%;
+      background: var(--surface);
+      color: var(--text);
+      border: 2px solid var(--border);
+      text-align: center;
+      text-decoration: none;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 14.5px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    /* Cards de Explicação */
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      font-size: 14.5px;
+    }
+    .highlight-box {
+      background: #0f0f0f;
+      color: #ffffff;
+      border-radius: 16px;
+      padding: 18px 16px;
+      margin-bottom: 16px;
+    }
+    .highlight-box strong.green { color: var(--neon-green); font-size: 24px; display: block; margin: 4px 0; }
+
+    .pink-note {
+      background: #fff5f9;
+      border-left: 4px solid var(--pink);
+      padding: 14px;
+      border-radius: 0 12px 12px 0;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .emphasis-banner {
+      background: #fff5f9;
+      border: 1.5px solid var(--pink);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 10px;
+    }
+    .emphasis-banner strong {
+      color: var(--pink);
+      font-weight: 900;
+    }
+
+    /* Cardápio Exemplo */
+    .menu-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+    .menu-box h3 {
+      font-size: 15px;
+      font-weight: 900;
+      margin-bottom: 10px;
+      color: var(--pink);
+      text-transform: uppercase;
+    }
+    .menu-item {
+      padding: 7px 0;
+      border-bottom: 1px dashed #d1d5db;
+      font-size: 14px;
+    }
+    .menu-item:last-child { border-bottom: none; }
+
+    /* Player Vertical Leve */
+    .lite-yt {
+      position: relative;
+      width: 100%;
+      max-width: 300px;
+      margin: 12px auto 18px;
+      aspect-ratio: 9 / 16;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #111;
+      cursor: pointer;
+      border: 2px solid #0f0f0f;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+    }
+    .lite-yt img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .lite-yt .play-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 62px; height: 62px;
+      background: var(--pink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(255, 30, 122, 0.6);
+    }
+    .lite-yt .play-btn::after {
+      content: '';
+      border-style: solid;
+      border-width: 12px 0 12px 20px;
+      border-color: transparent transparent transparent #ffffff;
+      margin-left: 4px;
+    }
+    .lite-yt iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+
+    /* Escala 0 a 10 */
+    .scale-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      margin: 12px 0 8px;
+    }
+    .scale-btn {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 0;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
+      color: var(--text);
+    }
+    .scale-btn:hover, .scale-btn:active {
+      background: var(--neon-green);
+      border-color: #051b0b;
+    }
+    .scale-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    /* Carrossel Horizontal */
+    .horizontal-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 10px;
+      margin: 12px 0 18px;
+    }
+    .ba-card {
+      flex: 0 0 78%;
+      scroll-snap-align: center;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .ba-card img { width: 100%; display: block; }
+
+    /* Timer Oferta */
+    .timer-banner {
+      background: #0f0f0f;
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+      margin-bottom: 16px;
+      border: 2px solid var(--pink);
+    }
+    .timer-banner span {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--neon-green);
+      display: block;
+      letter-spacing: 1px;
+    }
+
+    /* Card Oferta Teste R$ 20 */
+    .plan-card.featured {
+      border: 2.5px solid var(--pink);
+      border-radius: 20px;
+      padding: 20px 16px;
+      margin-bottom: 16px;
+      background: #fff;
+      box-shadow: 0 14px 32px rgba(255, 30, 122, 0.14);
+      position: relative;
+    }
+    .plan-badge {
+      display: inline-block;
+      background: var(--pink);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 5px 11px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .plan-price {
+      margin: 8px 0 14px;
+    }
+    .plan-price s {
+      font-size: 15px;
+      color: #ef4444;
+      font-weight: 800;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .price-main {
+      font-size: 38px;
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--text);
+      letter-spacing: -1px;
+    }
+    .price-sub {
+      display: inline-block;
+      margin-top: 6px;
+      background: #f0fdf4;
+      color: #065f46;
+      border: 1px solid #bbf7d0;
+      font-size: 12.5px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
+    .offer-checklist {
+      list-style: none;
+      margin: 14px 0 16px;
+      padding: 14px;
+      background: var(--surface);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .offer-checklist li {
+      margin-bottom: 7px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .offer-checklist li:last-child { margin-bottom: 0; }
+
+    /* Box Quebra de Objeção / Por que R$ 20? */
+    .trust-box {
+      background: #0f0f0f;
+      color: #ffffff;
+      border-radius: 18px;
+      padding: 18px 16px;
+      margin: 18px 0;
+    }
+    .trust-box h3 {
+      font-size: 17px;
+      font-weight: 900;
+      color: var(--neon-green);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+    .trust-box p {
+      font-size: 14px;
+      color: #e5e7eb;
+      margin-bottom: 10px;
+      line-height: 1.55;
+    }
+    .trust-box p:last-child { margin-bottom: 0; }
+
+    .no-renewal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 14px 0 16px;
+    }
+    .no-renewal-item {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 10px;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+    .no-renewal-item strong {
+      display: block;
+      font-size: 13.5px;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .no-renewal-item.highlight {
+      background: #fff5f9;
+      border-color: var(--pink);
+    }
+
+    /* Comparação 2 Opções */
+    .choice-box {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      border-left: 4px solid #9ca3af;
+    }
+    .choice-box.good {
+      background: #f0fdf4;
+      border-left-color: var(--neon-green);
+    }
+
+    .ig-comments-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .ig-comment-img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .ig-official-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      margin: 6px 0 18px;
+      padding: 9px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .ig-official-link svg { width: 15px; height: 15px; fill: var(--pink); }
+
+    .wa-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: #ffffff;
+      color: #0f0f0f;
+      border: 2px solid var(--wa-green);
+      font-weight: 800;
+      font-size: 14.5px;
+      padding: 14px;
+      border-radius: 14px;
+      text-decoration: none;
+      margin-top: 6px;
+    }
+    .wa-btn svg { width: 20px; height: 20px; fill: var(--wa-green); }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    AVALIAÇÃO GRATUITA • <span>TÔ ME MEXENDO</span>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-fill" id="progressBar"></div>
+  </div>
+
+  <div class="container">
+
+    <!-- 1) QUAL O SEU OBJETIVO? -->
+    <div class="step active" id="step1">
+      <div class="step-indicator">Etapa 1 de 10</div>
+      <h1>Qual o seu <span>objetivo</span> hoje?</h1>
+      <p class="subtitle">Selecione uma opção abaixo para iniciarmos sua avaliação gratuita:</p>
+
+      <button class="option-btn" onclick="setGoal('perder mais de 20 kgs')"><span>PERDER MAIS DE 20KGS</span><span class="option-arrow">→</span></button>
+      <button class="option-btn" onclick="setGoal('perder entre 10 e 20 kgs')"><span>PERDER ENTRE 10 E 20KGS</span><span class="option-arrow">→</span></button>
+      <button class="option-btn" onclick="setGoal('perder entre 5 e 10 kgs')"><span>PERDER ENTRE 5 E 10KGS</span><span class="option-arrow">→</span></button>
+      <button class="option-btn" onclick="setGoal('perder menos de 5 kgs')"><span>PERDER MENOS DE 5KGS</span><span class="option-arrow">→</span></button>
+      <button class="option-btn" onclick="setGoal('manter o peso e definir')"><span>MANTER O PESO E DEFINIR</span><span class="option-arrow">→</span></button>
+      <button class="option-btn" onclick="setGoal('ganhar peso')"><span>GANHAR PESO</span><span class="option-arrow">→</span></button>
+    </div>
+
+    <!-- 2) QUAL O SEU PESO ATUAL? -->
+    <div class="step" id="step2">
+      <div class="step-indicator">Etapa 2 de 10</div>
+      <h2>Qual o seu <span>peso atual</span>?</h2>
+      <p class="subtitle">Informe seu peso aproximado para calcularmos sua necessidade calórica diária:</p>
+
+      <div class="weight-box">
+        <div class="weight-input-wrap">
+          <input type="number" id="weightInput" class="weight-input" placeholder="75" min="30" max="300" inputmode="numeric">
+          <span class="weight-unit">kg</span>
+        </div>
+        <div class="error-msg" id="weightError">Por favor, digite seu peso atual em kg.</div>
+      </div>
+
+      <button class="cta-btn" onclick="saveWeight()">CONTINUAR →</button>
+    </div>
+
+    <!-- 3) CITE SUAS PRINCIPAIS DIFICULDADES -->
+    <div class="step" id="step3">
+      <div class="step-indicator">Etapa 3 de 10</div>
+      <h2>Cite suas <span>principais dificuldades</span></h2>
+      <p class="subtitle">Você pode selecionar mais de uma opção:</p>
+
+      <div class="multi-option" onclick="toggleDiff(this)">
+        <div class="custom-check">✓</div>
+        <span>Falta de tempo</span>
+      </div>
+      <div class="multi-option" onclick="toggleDiff(this)">
+        <div class="custom-check">✓</div>
+        <span>Compulsão</span>
+      </div>
+      <div class="multi-option" onclick="toggleDiff(this)">
+        <div class="custom-check">✓</div>
+        <span>Desânimo</span>
+      </div>
+      <div class="multi-option" onclick="toggleDiff(this)">
+        <div class="custom-check">✓</div>
+        <span>Falta de direção</span>
+      </div>
+      <div class="multi-option" onclick="toggleDiff(this)">
+        <div class="custom-check">✓</div>
+        <span>Outros motivos</span>
+      </div>
+
+      <button class="cta-btn" style="margin-top: 14px;" onclick="goToStep(4)">VER MINHA AVALIAÇÃO →</button>
+    </div>
+
+    <!-- 4) AVALIAÇÃO DO SEU CASO (TREINO) -->
+    <div class="step" id="step4">
+      <div class="step-indicator">Avaliação do Seu Caso • Parte 1</div>
+      <h2>O que você precisa para <span id="goalDisplay">perder peso</span> é:</h2>
+
+      <div class="info-card">
+        <p style="font-weight: 900; font-size: 18.5px; line-height: 1.28; margin-bottom: 10px;">
+          🏋️‍♀️ Fazer, no mínimo, <span style="color: var(--pink);">2 dias de treino</span> <span style="font-size: 15.5px; font-weight: 800;">(sim, só isso é suficiente)</span>
+        </p>
+        <p style="margin-bottom: 12px; font-size: 15px;">• <strong>Casa:</strong> ~20min ou <strong>Academia:</strong> ~40min</p>
+        <div class="emphasis-banner">
+          Isso vai estimular sua <strong>massa muscular</strong> e fazer seu corpo <strong>queimar muita gordura.</strong> 🔥🔥
+        </div>
+      </div>
+
+      <p style="font-weight: 800; font-size: 14.5px; text-align: center;">Veja esse resultado pra comprovar 👇</p>
+      <div class="lite-yt" onclick="loadVideo(this, 'wIJMYopd7ns')">
+        <img src="https://i.ytimg.com/vi/wIJMYopd7ns/hqdefault.jpg" alt="Resultado Tô Me Mexendo">
+        <div class="play-btn"></div>
+      </div>
+
+      <button class="cta-btn" onclick="goToStep(5)">QUERO VER DA DIETA TAMBÉM →</button>
+    </div>
+
+    <!-- 5) DIETA E CALORIAS + ESCALA 0 A 10 -->
+    <div class="step" id="step5">
+      <div class="step-indicator">Avaliação do Seu Caso • Parte 2</div>
+      <h2>Você precisa de <span id="kcalTitle">1.700kcal</span> por dia</h2>
+
+      <div class="highlight-box">
+        <span style="font-size: 12px; font-weight: 700; color: #d1d5db;">RECOMENDADO PARA O SEU PESO (<span id="weightDisplay">75</span>KG):</span>
+        <strong class="green">Mínimo 4 refeições por dia + sobremesa</strong>
+        <p style="font-size: 14px; color: #e5e7eb; margin-top: 8px;">⚡ Isso vai fazer seu <strong style="color: var(--neon-green);">metabolismo acelerar</strong> (se está chegando nutrientes, seu corpo gasta mais).</p>
+      </div>
+
+      <div class="pink-note">
+        E vai <strong>eliminar a compulsão</strong>: por estar bem saciada, você se controla melhor — <strong>mesma lógica do Mounjaro, porém com comida de verdade!!</strong>
+      </div>
+
+      <div class="menu-box">
+        <h3>🍽️ Exemplo de cardápio:</h3>
+        <div class="menu-item"><strong>Café da manhã:</strong> Pão com ovo e queijo</div>
+        <div class="menu-item"><strong>Almoço:</strong> Arroz, feijão, frango e legumes</div>
+        <div class="menu-item"><strong>Sobremesa:</strong> Chocolate de sobremesa 🍫</div>
+        <div class="menu-item"><strong>Lanche da tarde:</strong> Banana com leite em pó e aveia</div>
+        <div class="menu-item"><strong>Jantar:</strong> Pão com hambúrguer e queijo</div>
+      </div>
+
+      <p style="font-weight: 800; font-size: 14.5px; text-align: center;">Resultado pra comprovar que é possível emagrecer comendo chocolate todo dia 👇</p>
+      <div class="lite-yt" onclick="loadVideo(this, '1l4r4RO2-ls')">
+        <img src="https://i.ytimg.com/vi/1l4r4RO2-ls/hqdefault.jpg" alt="Emagreceu comendo chocolate todo dia">
+        <div class="play-btn"></div>
+      </div>
+
+      <p style="font-weight: 900; font-size: 15.5px; text-align: center; margin-top: 10px;">De 0 a 10, quanto você acha possível de seguir um cardápio assim, e treinar 2 dias por semana?</p>
+
+      <div class="scale-grid">
+        <button class="scale-btn" onclick="goToStep(6)">0</button>
+        <button class="scale-btn" onclick="goToStep(6)">1</button>
+        <button class="scale-btn" onclick="goToStep(6)">2</button>
+        <button class="scale-btn" onclick="goToStep(6)">3</button>
+        <button class="scale-btn" onclick="goToStep(6)">4</button>
+        <button class="scale-btn" onclick="goToStep(6)">5</button>
+        <button class="scale-btn" onclick="goToStep(6)">6</button>
+        <button class="scale-btn" onclick="goToStep(6)">7</button>
+        <button class="scale-btn" onclick="goToStep(6)">8</button>
+        <button class="scale-btn" onclick="goToStep(6)">9</button>
+        <button class="scale-btn" style="grid-column: span 2; background: var(--neon-green);" onclick="goToStep(6)">10</button>
+      </div>
+      <div class="scale-labels">
+        <span>0 = Impossível</span>
+        <span>10 = Totalmente possível</span>
+      </div>
+    </div>
+
+    <!-- 6) O MAIS DIFÍCIL É MANTER -->
+    <div class="step" id="step6">
+      <div class="step-indicator">Etapa 6 de 10</div>
+      <h2>Viu como <span>não é tão difícil</span>?</h2>
+      <div class="info-card" style="font-size: 15.5px;">
+        <p style="margin-bottom: 10px;">O mais difícil é <strong>MANTER</strong>. Né?</p>
+        <p style="margin-bottom: 10px;">No dia a dia, somos engolidos pela correria.</p>
+        <p>Esquecemos de nos cuidar, e acaba ficando de lado tudo isso.</p>
+      </div>
+
+      <p style="font-weight: 900; font-size: 17px; margin-bottom: 14px;">Acontece com você também?</p>
+
+      <button class="cta-btn" onclick="goToStep(7)">SIM, ACONTECE COMIGO</button>
+      <button class="secondary-btn" onclick="goToStep(7)">NÃO</button>
+    </div>
+
+    <!-- 7) ÚLTIMA PERGUNTA (BANHO / AUTOMÁTICO) -->
+    <div class="step" id="step7">
+      <div class="step-indicator">Última pergunta...</div>
+      <h2>Você toma banho todos os dias. <span>Certo?</span></h2>
+      <div class="info-card" style="font-size: 15.5px;">
+        <p style="margin-bottom: 10px;">Você faz isso porque é <strong>AUTOMÁTICO</strong> já!!</p>
+        <p>Você precisa de 15, 20min. Mas não precisa pensar ou estar motivada...</p>
+      </div>
+
+      <p style="font-weight: 900; font-size: 17px; margin-bottom: 14px;">Concorda?</p>
+
+      <button class="cta-btn" onclick="goToStep(8)">SIM, TOMO BANHO TODO DIA</button>
+      <button class="secondary-btn" onclick="goToStep(8)">NÃO TOMO BANHO TODO DIA</button>
+    </div>
+
+    <!-- 8) VÍDEO DO MÉTODO DE 12 SEMANAS (COM CAPA PRÓPRIA DO YOUTUBE) -->
+    <div class="step" id="step8">
+      <div class="step-indicator">O Método • 12 Semanas</div>
+      <h2>A lógica pra você ter resultado é ter um passo a passo pra criar <span>constância</span>. Dessa forma, fica tudo automático.</h2>
+
+      <div class="info-card" style="font-size: 15px; line-height: 1.55;">
+        <p style="margin-bottom: 10px;">Com <strong>mais de 10 anos de Experiência</strong> sendo <strong>Nutri, Personal e Especialista em Mudança de Hábitos</strong>, criei essa forma <strong>INFALÍVEL</strong> pra você criar <span style="color: var(--pink); font-weight: 900;">constância em 12 semanas!</span></p>
+        <p style="font-weight: 800; color: var(--text);">São 10 anos em 3 minutos. Vale a pena ver 🙌🏻</p>
+        <p style="font-size: 13px; font-weight: 900; color: var(--pink); margin-top: 4px;">(VOCÊ VAI SE SURPREENDER, SÉRIO)</p>
+      </div>
+
+      <div class="lite-yt" onclick="loadVideo(this, '2fy5QJigrMY')">
+        <img src="https://i.ytimg.com/vi/2fy5QJigrMY/hqdefault.jpg" alt="Método Infalível 12 Semanas">
+        <div class="play-btn"></div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+        <button class="cta-btn" style="font-size: 14px; padding: 15px 8px; margin: 0;" onclick="goToStep(9)">✓ VI O VÍDEO</button>
+        <button class="secondary-btn" style="font-size: 14px; padding: 15px 8px; margin: 0;" onclick="goToStep(9)">NÃO VI O VÍDEO</button>
+      </div>
+    </div>
+
+    <!-- 9) TRANSIÇÃO PARA A OFERTA (PRESENTE + ENTREGÁVEIS + RESULTADOS) -->
+    <div class="step" id="step9">
+      <div class="step-indicator">Etapa 9 de 10 • Presente Liberado</div>
+      <h2>Agora tenho um <span>presente</span> pra você 🎁</h2>
+      <p style="font-size: 15.5px; font-weight: 800; margin-bottom: 14px;">Mas antes, responda com <span style="color: var(--pink);">SINCERIDADE</span>:</p>
+
+      <div class="info-card" style="border: 2px solid #0f0f0f;">
+        <h3 style="font-size: 17.5px; font-weight: 900; line-height: 1.3; margin-bottom: 12px;">
+          Se você pudesse testar tudo por <span style="color: var(--pink);">apenas R$20 (sem renovação automática)</span>, você investiria para ter:
+        </h3>
+        <p style="font-weight: 900; font-size: 15px; background: #fff5f9; padding: 10px 12px; border-radius: 10px; border-left: 4px solid var(--pink); margin-bottom: 12px;">
+          Uma ferramenta INFALÍVEL pra vc criar Constância em 12 semanas +
+        </p>
+        <ul style="list-style: none; font-size: 14.5px; line-height: 1.85;">
+          <li>✅ Treino personalizado</li>
+          <li>✅ Dieta calculada com várias opções</li>
+          <li>✅ Ajustes individuais no WhatsApp com Nutri e Personal</li>
+          <li>➕ Grupo de incentivo</li>
+          <li>➕ Desafios valendo prêmios</li>
+          <li>➕ Notificações de motivação</li>
+          <li>➕ App exclusivo</li>
+          <li>➕ +900 aulas extras</li>
+          <li>➕ Biblioteca de Conteúdos</li>
+        </ul>
+      </div>
+
+      <p style="font-weight: 900; font-size: 15px; margin-top: 16px;">Alguns resultados de quem já investiu conosco:</p>
+      <div class="horizontal-scroll">
+        <div class="ba-card"><img src="antes-depois-1.png" alt="Antes e Depois 1" loading="lazy"></div>
+        <div class="ba-card"><img src="antes-depois-2.png" alt="Antes e Depois 2" loading="lazy"></div>
+        <div class="ba-card"><img src="antes-depois-3.png" alt="Antes e Depois 3" loading="lazy"></div>
+        <div class="ba-card"><img src="antes-depois-4.png" alt="Antes e Depois 4" loading="lazy"></div>
+        <div class="ba-card"><img src="antes-depois-5.png" alt="Antes e Depois 5" loading="lazy"></div>
+        <div class="ba-card"><img src="antes-depois-6.png" alt="Antes e Depois 6" loading="lazy"></div>
+      </div>
+
+      <button class="cta-btn" onclick="goToStep(10)">SIM, EU TESTARIA! LIBERAR MEU ACESSO →</button>
+    </div>
+
+    <!-- 10) OFERTA TESTE R$ 20 (SEM RENOVAÇÃO AUTOMÁTICA + QUEBRA DE OBJEÇÃO) -->
+    <div class="step" id="step10">
+      <div class="timer-banner">
+        <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase;">⏳ Condição de teste liberada por:</div>
+        <span id="countdownTimer">15:00</span>
+      </div>
+
+      <h2>Teste o programa completo por 1 mês por <span>apenas R$20</span></h2>
+      <p class="subtitle" style="margin-bottom: 14px;">Sem pegadinha, sem fidelidade e <strong>sem renovação automática</strong> no seu cartão.</p>
+
+      <!-- CARD ÚNICO DA OFERTA MENSAL DE TESTE -->
+      <div class="plan-card featured">
+        <div class="plan-badge">🎁 Acesso Teste • 1 Mês Completo</div>
+        <h3 style="font-size: 18px; font-weight: 900;">Plano Mensal — Programa Completo</h3>
+        <div class="plan-price">
+          <s>De R$97,00/mês</s>
+          <div class="price-main">Por R$20,00 <small style="font-size: 14px; font-weight: 700; color: var(--muted);">pagamento único</small></div>
+          <span class="price-sub">🔒 Sem renovação automática • Você no controle</span>
+        </div>
+
+        <ul class="offer-checklist">
+          <li><span>✅</span><div><strong>Treino personalizado</strong> (pra casa ou academia)</div></li>
+          <li><span>✅</span><div><strong>Dieta calculada</strong> com várias opções e sobremesa</div></li>
+          <li><span>✅</span><div><strong>Ferramenta de Constância</strong> + App exclusivo e incentivo diário</div></li>
+          <li><span>✅</span><div><strong>Suporte individual no WhatsApp</strong> direto com Nutri e Personal</div></li>
+        </ul>
+
+        <a href="https://payfast.greenn.com.br/193821/offer/8Wfs0T" id="btnMensalTop" class="cta-btn">QUERO TESTAR 1 MÊS POR R$20 →</a>
+      </div>
+
+      <!-- QUEBRA DE DESCONFIANÇA ("POR QUE TÃO BARATO?") -->
+      <div class="trust-box">
+        <h3>🤔 "Por que só R$20 se tem acompanhamento individual?"</h3>
+        <p>Como você ainda não conhece o nosso trabalho por dentro, é normal desconfiar de promessas na internet.</p>
+        <p>Em vez de te pedir um compromisso caro logo de cara, eu prefiro <strong>abrir as portas por 30 dias</strong> pra você sentir na prática o nosso treino, a dieta e o suporte no WhatsApp — <strong>por menos que o preço de um lanche.</strong></p>
+        <p style="color: var(--neon-green); font-weight: 800;">É simples: eu confio que quando você tiver resultado no primeiro mês, vai querer continuar.</p>
+      </div>
+
+      <!-- COMO FUNCIONA A RENOVAÇÃO (TRANSPARÊNCIA TOTAL) -->
+      <p style="font-weight: 900; font-size: 16px; margin-bottom: 4px;">Como funciona depois dos 30 dias?</p>
+      <p style="font-size: 13.5px; color: var(--muted); margin-bottom: 10px;">Não existe cobrança surpresa. Passado o seu 1 mês de teste:</p>
+
+      <div class="no-renewal-grid">
+        <div class="no-renewal-item highlight">
+          <strong>💚 Se você gostar:</strong>
+          Você escolhe renovar e <strong>mantém o valor de R$20/mês</strong> travado pra você.
+        </div>
+        <div class="no-renewal-item">
+          <strong>👋 Se não gostar:</strong>
+          Basta <strong>não renovar</strong>. Não cobramos nada automático e segue tudo certo.
+        </div>
+      </div>
+
+      <div style="margin: 22px 0;">
+        <p style="font-weight: 900; font-size: 16px; margin-bottom: 10px;">Os próximos 30 dias vão passar de qualquer jeito. Você tem 2 opções:</p>
+        <div class="choice-box">
+          <strong>Opção 1)</strong> Continuar tentando focar 100%, (sempre que bater o desespero) sem direção, começar e parar. E daqui 1 mês estar do mesmo jeito.
+        </div>
+        <div class="choice-box good">
+          <strong>Opção 2)</strong> Testar por R$20 um método criado pra quem tem dificuldade — com direção, incentivo diário e suporte individual no WhatsApp com Nutri e Personal.
+        </div>
+      </div>
+
+      <div class="pink-note">
+        🛡️ <strong>Risco Zero na Prática:</strong> Pagamento único de R$20, sem renovação automática e ainda com <strong>7 dias de garantia incondicional</strong>. Se entrar e não curtir, devolvemos seus R$20 na hora.
+      </div>
+
+      <p style="font-weight: 900; font-size: 15.5px; margin-top: 18px;">Veja aqui algumas avaliações reais de alunos:</p>
+      <div class="ig-comments-grid">
+        <img src="comentario-1.jpg" alt="Avaliação 1" class="ig-comment-img" loading="lazy" onerror="this.style.display='none'">
+        <img src="comentario-2.jpg" alt="Avaliação 2" class="ig-comment-img" loading="lazy" onerror="this.style.display='none'">
+        <img src="comentario-3.jpg" alt="Avaliação 3" class="ig-comment-img" loading="lazy" onerror="this.style.display='none'">
+        <img src="comentario-4.jpg" alt="Avaliação 4" class="ig-comment-img" loading="lazy" onerror="this.style.display='none'">
+      </div>
+
+      <div style="text-align: center;">
+        <a href="https://www.instagram.com/tomemexendo/" target="_blank" rel="noopener" class="ig-official-link">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Mais avaliações em @tomemexendo
+        </a>
+      </div>
+
+      <h3 style="font-size: 18px; font-weight: 900; text-align: center; margin-bottom: 12px;">Bora testar por 30 dias sem compromisso?</h3>
+
+      <a href="https://payfast.greenn.com.br/193821/offer/8Wfs0T" id="btnMensalBottom" class="cta-btn">1) Testar 1 mês completo por R$20 (sem renovação automática)</a>
+      <a href="https://wa.me/5511948128749?text=Oi!%20Fiz%20a%20avalia%C3%A7%C3%A3o%20gratuita%20do%20T%C3%B4%20Me%20Mexendo%20e%20tenho%20uma%20d%C3%BAvida%20sobre%20o%20teste%20de%20R%2420..." target="_blank" rel="noopener" class="wa-btn">
+        <svg viewBox="0 0 32 32"><path d="M16 .5C7.44.5.5 7.44.5 16c0 2.74.72 5.41 2.08 7.77L.37 31.63l8.08-2.12A15.43 15.43 0 0 0 16 31.5c8.56 0 15.5-6.94 15.5-15.5S24.56.5 16 .5zm0 28.38c-2.46 0-4.87-.66-6.98-1.91l-.5-.3-4.79 1.26 1.28-4.67-.33-.52A12.82 12.82 0 0 1 3.12 16C3.12 8.9 8.9 3.12 16 3.12S28.88 8.9 28.88 16 23.1 28.88 16 28.88zm7.06-9.64c-.39-.19-2.29-1.13-2.64-1.26-.36-.13-.62-.19-.88.19-.26.39-1 1.26-1.23 1.52-.23.26-.45.29-.84.1-.39-.19-1.64-.6-3.12-1.92-1.15-1.03-1.93-2.3-2.16-2.69-.23-.39-.02-.6.17-.79.18-.17.39-.45.58-.68.19-.23.26-.39.39-.65.13-.26.06-.49-.03-.68-.1-.19-.88-2.11-1.2-2.89-.32-.76-.64-.66-.88-.67h-.75c-.26 0-.68.1-1.03.49-.36.39-1.36 1.33-1.36 3.24 0 1.91 1.39 3.76 1.58 4.02.19.26 2.74 4.18 6.63 5.86.93.4 1.65.64 2.21.82.93.3 1.78.25 2.45.15.75-.11 2.29-.94 2.61-1.84.32-.91.32-1.68.23-1.84-.1-.16-.36-.26-.75-.45z"/></svg>
+        2) Tirar dúvidas via WhatsApp
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    const LINK_CHECKOUT_MENSAL = 'https://payfast.greenn.com.br/193821/offer/8Wfs0T';
+
+    let selectedGoal = 'perder peso';
+    let userWeight = 75;
+    let timerStarted = false;
+
+    const progressMap = {
+      1: '10%', 2: '20%', 3: '30%', 4: '40%', 5: '50%',
+      6: '60%', 7: '70%', 8: '80%', 9: '90%', 10: '100%'
+    };
+
+    function goToStep(stepNumber) {
+      document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+      document.getElementById('step' + stepNumber).classList.add('active');
+      document.getElementById('progressBar').style.width = progressMap[stepNumber];
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (stepNumber === 10 && !timerStarted) {
+        startTimer(15 * 60);
+        timerStarted = true;
+      }
+    }
+
+    function setGoal(goal) {
+      selectedGoal = goal;
+      document.getElementById('goalDisplay').textContent = selectedGoal;
+      goToStep(2);
+    }
+
+    function saveWeight() {
+      const val = parseFloat(document.getElementById('weightInput').value);
+      const err = document.getElementById('weightError');
+      if (!val || val < 30 || val > 300) {
+        err.style.display = 'block';
+        return;
+      }
+      err.style.display = 'none';
+      userWeight = val;
+
+      let kcal = '1.700kcal';
+      if (userWeight > 120) {
+        kcal = '2.300kcal';
+      } else if (userWeight >= 90) {
+        kcal = '2.000kcal';
+      }
+
+      document.getElementById('weightDisplay').textContent = userWeight;
+      document.getElementById('kcalTitle').textContent = kcal;
+      goToStep(3);
+    }
+
+    function toggleDiff(el) {
+      el.classList.toggle('selected');
+    }
+
+    function loadVideo(el, videoId) {
+      el.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    }
+
+    function startTimer(duration) {
+      let timer = duration;
+      const display = document.getElementById('countdownTimer');
+      setInterval(function () {
+        const minutes = String(Math.floor(timer / 60)).padStart(2, '0');
+        const seconds = String(timer % 60).padStart(2, '0');
+        display.textContent = minutes + ':' + seconds;
+        if (--timer < 0) timer = 0;
+      }, 1000);
+    }
+
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const affId = params.get('a_id');
+      if (affId) {
+        localStorage.setItem('tmm_greenn_aid', affId);
+      }
+      const savedAid = localStorage.getItem('tmm_greenn_aid');
+
+      function appendAid(url) {
+        if (!savedAid) return url;
+        const sep = url.includes('?') ? '&' : '?';
+        return url + sep + 'a_id=' + encodeURIComponent(savedAid);
+      }
+
+      const mensalFinal = appendAid(LINK_CHECKOUT_MENSAL);
+
+      document.getElementById('btnMensalTop').href = mensalFinal;
+      document.getElementById('btnMensalBottom').href = mensalFinal;
+    })();
+  </script>
+
+</body>
+</html>
