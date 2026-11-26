@@ -508,6 +508,71 @@
     }
     .trust-box p:last-child { margin-bottom: 0; }
 
+    /* Bloco Próximos Passos / Liberação */
+    .onboarding-box {
+      background: #f0fdf4;
+      border: 2px solid var(--neon-green);
+      border-radius: 18px;
+      padding: 18px 16px;
+      margin: 18px 0;
+    }
+    .onboarding-box h3 {
+      font-size: 16.5px;
+      font-weight: 900;
+      color: #051b0b;
+      line-height: 1.28;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .onboarding-box h3 span {
+      color: var(--pink);
+    }
+    .step-timeline {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .step-timeline li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: #ffffff;
+      border: 1px solid #d1fae5;
+      border-radius: 12px;
+      padding: 11px 12px;
+      font-size: 13.8px;
+      line-height: 1.45;
+      color: var(--text);
+    }
+    .timeline-badge {
+      background: #0f0f0f;
+      color: var(--neon-green);
+      font-weight: 900;
+      font-size: 12px;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .support-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #dcfce7;
+      color: #065f46;
+      font-weight: 900;
+      font-size: 13px;
+      padding: 3px 9px;
+      border-radius: 6px;
+      text-decoration: none;
+      margin-top: 4px;
+    }
+
     .no-renewal-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -830,10 +895,10 @@
         <div class="ba-card"><img src="antes-depois-6.png" alt="Antes e Depois 6" loading="lazy"></div>
       </div>
 
-      <button class="cta-btn" onclick="goToStep(10)">SIM, EU TESTARIA! LIBERAR MEU ACESSO →</button>
+      <button class="cta-btn" onclick="goToStep(10)">SIM, EU TESTARIA. QUERO MAIS INFORMAÇÕES →</button>
     </div>
 
-    <!-- 10) OFERTA TESTE R$ 20 (SEM RENOVAÇÃO AUTOMÁTICA + QUEBRA DE OBJEÇÃO) -->
+    <!-- 10) OFERTA TESTE R$ 20 (SEM RENOVAÇÃO AUTOMÁTICA + PRÓXIMOS PASSOS + QUEBRA DE OBJEÇÃO) -->
     <div class="step" id="step10">
       <div class="timer-banner">
         <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase;">⏳ Condição de teste liberada por:</div>
@@ -861,6 +926,32 @@
         </ul>
 
         <a href="https://payfast.greenn.com.br/193821/offer/8Wfs0T" id="btnMensalTop" class="cta-btn">QUERO TESTAR 1 MÊS POR R$20 →</a>
+      </div>
+
+      <!-- PRÓXIMOS PASSOS APÓS A INSCRIÇÃO (QUEBRA DE MEDO DE PAGAR E NÃO RECEBER) -->
+      <div class="onboarding-box">
+        <h3>📲 Após a inscrição, <span>quais os próximos passos?</span> Em quanto tempo é liberado?</h3>
+        <ul class="step-timeline">
+          <li>
+            <span class="timeline-badge">1</span>
+            <div>
+              Assim que confirmar, você já é direcionado(a) direto para o nosso <strong>WhatsApp oficial de Suporte</strong>:<br>
+              <a href="https://wa.me/5511972627812?text=Oi!%20Acabei%20de%20fazer%20minha%20inscri%C3%A7%C3%A3o%20no%20T%C3%B4%20Me%20Mexendo!" target="_blank" rel="noopener" class="support-pill">📞 (11) 97262-7812 • Suporte TMM</a>
+            </div>
+          </li>
+          <li>
+            <span class="timeline-badge">2</span>
+            <div>
+              <strong>Liberação em até 1 hora:</strong> enviamos seu treino, sua dieta, o acesso ao app e ao grupo — com <strong>Nutri e Personal à sua disposição</strong> pra tirar dúvidas, fazer os ajustes individuais e te acompanhar.
+            </div>
+          </li>
+          <li>
+            <span class="timeline-badge">3</span>
+            <div>
+              <strong>Acompanhamento de perto:</strong> você pode chamar no WhatsApp <strong>todos os dias</strong> se precisar, mandamos mensagem diária no grupo de incentivo e, <strong>pelo menos 2x no mês</strong>, nós chamamos você no privado pra saber como está sua evolução.
+            </div>
+          </li>
+        </ul>
       </div>
 
       <!-- QUEBRA DE DESCONFIANÇA ("POR QUE TÃO BARATO?") -->
